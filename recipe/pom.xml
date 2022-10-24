@@ -13,7 +13,7 @@
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>ca.gbc.comp3095</groupId>
+    <groupId>ca.gbc.yumoid</groupId>
     <artifactId>recipe</artifactId>
     <version>0.0.4-SNAPSHOT</version>
     <name>recipe</name>
@@ -24,7 +24,7 @@
     </properties>
 
     <scm>
-        <developerConnection>scm:git:https://github.com/CalvinPierce/comp3095_assignment1.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/kellyhoang1291/yumoid.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
