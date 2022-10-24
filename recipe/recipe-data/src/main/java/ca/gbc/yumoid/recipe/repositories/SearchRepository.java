@@ -24,10 +24,8 @@ public interface SearchRepository extends JpaRepository<Recipe, Long> {
     @Query("SELECT r FROM Recipe r JOIN r.likedByUsers u WHERE u.username LIKE %?1% ")
     List<Recipe> findRecipeByUsername(String userName);
 
-    @Query("SELECT m FROM Meal m WHERE m.user.username LIKE %?1%")
+    @Query("SELECT m FROM Meal m join m.user u WHERE u.username LIKE %?1%")
     List<Meal> findMealByUsername(String userName);
-
-
 
 }
 
