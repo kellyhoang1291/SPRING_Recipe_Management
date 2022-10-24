@@ -18,33 +18,33 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/create-recipe' ? 'active':''}"
-                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/create-recipe' ? 'page':''}"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/recipe/create' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/recipe/create' ? 'page':''}"
                            th:href="@{/registered/create-recipe}" th:text="'Create Recipe'"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/view-recipe' ? 'active':''}"
-                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/view-recipe' ? 'page':''}"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/recipe/view' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/recipe/view' ? 'page':''}"
                            th:href="@{/registered/view-recipe}" th:text="'View Recipes'"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/search-recipe' ? 'active':''}"
-                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/search-recipe' ? 'page':''}"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/recipe/search' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/recipe/search' ? 'page':''}"
                            th:href="@{/registered/search-recipe}" th:text="'Search Recipes'"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/view-profile' ? 'active':''}"
-                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/view-profile' ? 'page':''}"
-                           th:href="@{/registered/view-profile}" th:text="'View Profile'"></a>
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/user/view-profile' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/user/view-profile' ? 'page':''}"
+                           th:href="@{/registered/user/view-profile}" th:text="'View Profile'"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/plan-meal' ? 'active':''}"
-                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/plan-meal' ? 'page':''}"
-                           th:href="@{/registered/plan-meal}" th:text="'Plan Meal'"></a>
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/meal/view' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/meal/view' ? 'page':''}"
+                           th:href="@{/registered/meal/view}" th:text="'Plan Meal'"></a>
                     </li>
                     <li class="nav-item">
                         <form th:action="@{/doLogout}" method="post">
