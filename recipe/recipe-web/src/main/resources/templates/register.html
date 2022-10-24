@@ -63,16 +63,16 @@
                                     <div class="row mb-3">
                                         <div class="col">
                                             <label class="" th:text="'Username:'"></label>
-                                            <input type="text" class="form-control" th:field="*{username}" th:required="true"
-                                                   th:oninvalid="this.setCustomValidity('Username cannot be blank')"
+                                            <input type="text" class="form-control" th:field="*{username}" th:required="true" autocomplete="false"
+                                                   th:oninvalid="this.setCustomValidity('Please enter username')"
                                                    th:oninput="this.setCustomValidity('')"/>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col">
                                             <label class="" th:text="'Password:'"></label>
-                                            <input type="password" id="password" class="form-control" th:field="*{password}" th:required="true"
-                                                   th:oninvalid="this.setCustomValidity('Password cannot be blank')"
+                                            <input type="password" id="password" class="form-control" th:field="*{password}" th:required="true" autocomplete="false"
+                                                   th:oninvalid="this.setCustomValidity('Please enter password')"
                                                    th:oninput="this.setCustomValidity('')"/>
                                         </div>
                                     </div>
