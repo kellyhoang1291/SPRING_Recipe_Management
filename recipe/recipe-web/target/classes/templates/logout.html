@@ -14,9 +14,9 @@
     </style>
 </head>
 <body class="text-center">
-<div th:replace="header :: myheader"></div>
-    <h2 th:text="'User logged out successfully'"></h2>
+<br>
+<p>Successfully logged out! Click <a th:href="@{/}" th:text="'here'"></a> to login.</p>
 
-<a th:href="@{/}" th:text="'Click here to go back to login page'"></a>
+
 </body>
 </html>
