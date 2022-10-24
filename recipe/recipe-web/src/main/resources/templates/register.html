@@ -62,31 +62,17 @@
                        th:oninput="this.setCustomValidity('')"/>
             </div>
         </div>
-        <div>
-            <input type="checkbox" onclick="myFunction()" th:text="' Show Password'"/>
-        </div>
         <div class="row mb-3">
             <label class="col-sm-2"></label>
             <label class="col-sm-2"></label>
             <div class="col-sm-4">
-                <button class="w-100 btn btn-lg btn-dark" type="submit" th:text="'Register'"></button>
+                <button class="btn btn-lg btn-dark" type="submit" th:text="'Register'"></button>
             </div>
         </div>
     </form>
-    <br>
     <form th:action="@{/}">
-        <button class="w-100 btn btn-lg btn-dark" type="submit" th:text="'Cancel'"></button>
+        <button class="btn btn-lg btn-dark" type="submit" th:text="'Cancel'"></button>
     </form>
 </div>
-<script>
-    function myFunction() {
-        let x = document.getElementById("password");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }
-    }
-</script>
 </body>
 </html>

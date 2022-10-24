@@ -8,6 +8,7 @@
  * security authentication.
  **********************************************************************************/
 package ca.gbc.yumoid.recipe.services;
+
 import ca.gbc.yumoid.recipe.model.User;
 import ca.gbc.yumoid.recipe.repositories.RoleRepository;
 import ca.gbc.yumoid.recipe.repositories.UserRepository;
@@ -17,9 +18,7 @@ import java.util.HashSet;
 
 @Service
 public class UserService {
-
     final private UserRepository userRepository;
-
     final private RoleRepository roleRepository;
 
     public UserService(UserRepository userRepository, RoleRepository roleRepository) {
@@ -43,15 +42,4 @@ public class UserService {
         user.setEnabled(true);
         userRepository.save(user);
     }
-
-    public void saveNewPassword(User user){
-        userRepository.save(user);
-    }
-
-    public void updateUser(User user){
-        user.setRoles(new HashSet<>(roleRepository.findByName("user")));
-        user.setEnabled(true);
-        userRepository.save(user);
-    }
-
 }

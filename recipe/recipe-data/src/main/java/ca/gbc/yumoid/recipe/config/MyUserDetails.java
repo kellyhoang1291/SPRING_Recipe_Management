@@ -23,7 +23,7 @@ import java.util.Set;
 
 public class MyUserDetails implements UserDetails {
 
-    private User user;
+    final private User user;
 
     public MyUserDetails(User user) {
         this.user = user;
@@ -32,13 +32,13 @@ public class MyUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<Role> roles = user.getRoles();
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        List<SimpleGrantedAuthority> ga = new ArrayList<>();
 
         for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
+            ga.add(new SimpleGrantedAuthority(role.getName()));
         }
 
-        return authorities;
+        return ga;
     }
 
     @Override
@@ -50,6 +50,8 @@ public class MyUserDetails implements UserDetails {
     public String getUsername() {
         return user.getUsername();
     }
+
+    public User getUser(){ return user; }
 
     @Override
     public boolean isAccountNonExpired() {
