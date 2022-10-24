@@ -57,28 +57,28 @@
                 <textarea class="form-control" th:field="*{ingredients}" th:required="true"
                           th:oninvalid="this.setCustomValidity('Recipe ingredients cannot be blank')"
                           th:oninput="this.setCustomValidity('')"></textarea>
-            </div>
         </div>
-        <div class="row mb-3">
-            <label class="col-sm-2" th:text="'Steps:'"></label>
-            <div class="col-sm-8">
-                        <textarea class="form-control" th:field="*{steps}" th:required="true"
-                                  th:oninvalid="this.setCustomValidity('Recipe steps cannot be blank')"
-                                  th:oninput="this.setCustomValidity('')"></textarea>
-            </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2" th:text="'Steps:'"></label>
+        <div class="col-sm-8">
+                <textarea class="form-control" th:field="*{steps}" th:required="true"
+                          th:oninvalid="this.setCustomValidity('Recipe steps cannot be blank')"
+                          th:oninput="this.setCustomValidity('')"></textarea>
         </div>
-        <div class="row mb-3">
-            <label class="col-sm-2"></label>
-            <label class="col-sm-2"></label>
-            <div class="col-sm-4">
-                <button class="btn-lg btn-dark" type="submit" th:text="'Save'"></button>
-            </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2"></label>
+        <label class="col-sm-2"></label>
+        <div class="col-sm-4">
+            <button class="w-100 btn btn-lg btn-dark" type="submit" th:text="'Save'"></button>
         </div>
-        </form>
-        <br>
-        <form th:action="@{/registered/recipe/view}">
-            <button class="btn-lg btn-dark" type="submit" th:text="'Cancel'"></button>
-        </form>
+    </div>
+</form>
+<br>
+<form th:action="@{/registered/recipe/view}">
+    <button class="w-100 btn btn-lg btn-dark" type="submit" th:text="'Cancel'"></button>
+</form>
     </div>
 </body>
 </html>
