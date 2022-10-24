@@ -68,9 +68,34 @@ public class RegisteredController {
 
     //Like Recipe
     @PostMapping( "/updateRecipe/{id}")
-    public String updateRecipe(Model model, @PathVariable Long id) {
+    public String updateRecipe(@PathVariable Long id) {
         recipeService.markedAsFavoriteByID(id);
         return "redirect:/registered/view-recipe";
+    }
+
+    //Search Recipe
+    @RequestMapping(value = {"search", "/search-recipe", "/search-recipe.html"}, method = RequestMethod.GET)
+    public String search(Model model) {
+        model.addAttribute("recipe", new Recipe());
+        return "registered/recipe/search";
+    }
+
+    @RequestMapping(value = {"search", "/search-recipe", "/search-recipe.html"}, method = RequestMethod.POST)
+    public String search(HttpServletRequest request, Model model) {
+        String keyword = request.getParameter("name");
+        model.addAttribute("searchString", "Keyword: " + keyword);
+
+        List<Recipe> matchedRecipes = searchService.listAll(keyword);
+        model.addAttribute("nameCount", -1);
+        model.addAttribute("count", matchedRecipes.size());
+
+        //check if any recipes found
+        if (matchedRecipes.size() > 0) {
+            model.addAttribute("recipes", matchedRecipes);
+        } else {
+            model.addAttribute("message", "No recipe found. Please try different keyword.");
+        }
+        return "registered/recipe/search";
     }
 
     //MEAL
@@ -114,28 +139,4 @@ public class RegisteredController {
     }
 
 
-    // SEARCH
-    @RequestMapping(value = {"search", "/search-recipe", "/search-recipe.html"}, method = RequestMethod.GET)
-    public String search(Model model) {
-        model.addAttribute("recipe", new Recipe());
-        return "registered/recipe/search";
-    }
-
-    @RequestMapping(value = {"search", "/search-recipe", "/search-recipe.html"}, method = RequestMethod.POST)
-    public String search(HttpServletRequest request, Model model) {
-        String keyword = request.getParameter("name");
-        model.addAttribute("searchString", "Keyword: " + keyword);
-
-        List<Recipe> matchedRecipes = searchService.listAll(keyword);
-        model.addAttribute("nameCount", -1);
-        model.addAttribute("count", matchedRecipes.size());
-
-        //check if any recipes found
-        if (matchedRecipes.size() > 0) {
-            model.addAttribute("recipes", matchedRecipes);
-        } else {
-            model.addAttribute("message", "No recipe found. Please try different keyword.");
-        }
-        return "registered/recipe/search";
-    }
 }
