@@ -9,19 +9,15 @@
 package ca.gbc.yumoid.recipe.controllers;
 import ca.gbc.yumoid.recipe.model.Meal;
 import ca.gbc.yumoid.recipe.model.Recipe;
-import ca.gbc.yumoid.recipe.model.User;
 import ca.gbc.yumoid.recipe.repositories.SearchRepository;
 import ca.gbc.yumoid.recipe.services.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Objects;
 
 @RequestMapping("/registered")
 @Controller
@@ -52,7 +48,7 @@ public class RegisteredController {
     public String viewRecipe(Model model) {
         List<Recipe> listRecipes = searchService.listAll("");
         model.addAttribute("recipes", listRecipes);
-        return "registered/view-recipe";
+        return "registered/recipe/view";
     }
 
     //Create recipe
@@ -60,7 +56,7 @@ public class RegisteredController {
     public String create(Model model) {
         Recipe recipe = new Recipe();
         model.addAttribute("recipe", recipe);
-        return "registered/create-recipe";
+        return "registered/recipe/create";
     }
 
     @PostMapping(value = "/saveRecipe")
@@ -82,7 +78,7 @@ public class RegisteredController {
     @RequestMapping({"/plan", "/plan-meal", "plan-meal.html"})
     public String plan(Model model, Authentication authentication) {
         model.addAttribute("userMeals", searchRepository.findMealByUsername(authentication.getName()));
-        return "registered/plan-meal";
+        return "registered/meal/view";
     }
     //Create meals
     @RequestMapping({"/create-meal", "create-meal.html"})
@@ -91,14 +87,14 @@ public class RegisteredController {
         model.addAttribute("meal", meal);
         List<Recipe> listRecipes = searchService.listAll("");
         model.addAttribute("recipes", listRecipes);
-        return "registered/create-meal";
+        return "registered/meal/create";
     }
 
     @PostMapping(value = "/saveMeal")
     public String saveMeal(Meal meal, Authentication authentication, Model model) {
         mealService.save(meal);
         model.addAttribute("userMeals", searchRepository.findMealByUsername(authentication.getName()));
-        return "registered/plan-meal";
+        return "registered/meal/view";
     }
 
 
@@ -108,13 +104,13 @@ public class RegisteredController {
     public String viewProfile(Model model, Authentication authentication) {
         model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
         model.addAttribute("userRecipes", searchRepository.findRecipeByUsername(authentication.getName()));
-        return "registered/view-profile";
+        return "registered/user/view-profile";
     }
     //View Created & Favorite Recipe
     @RequestMapping({"/view-created-recipes", "view-created-recipes.html"})
     public String viewUserRecipes(Model model, Authentication authentication) {
         model.addAttribute("userRecipes", searchRepository.findRecipeByUsername(authentication.getName()));
-        return "registered/view-created-recipes";
+        return "registered/user/view-created-recipes";
     }
 
 
@@ -122,7 +118,7 @@ public class RegisteredController {
     @RequestMapping(value = {"search", "/search-recipe", "/search-recipe.html"}, method = RequestMethod.GET)
     public String search(Model model) {
         model.addAttribute("recipe", new Recipe());
-        return "registered/search-recipe";
+        return "registered/recipe/search";
     }
 
     @RequestMapping(value = {"search", "/search-recipe", "/search-recipe.html"}, method = RequestMethod.POST)
@@ -140,6 +136,6 @@ public class RegisteredController {
         } else {
             model.addAttribute("message", "No recipe found. Please try different keyword.");
         }
-        return "registered/search-recipe";
+        return "registered/recipe/search";
     }
 }
