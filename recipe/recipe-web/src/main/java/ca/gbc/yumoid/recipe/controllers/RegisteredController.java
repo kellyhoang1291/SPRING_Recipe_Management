@@ -12,7 +12,6 @@ import ca.gbc.yumoid.recipe.model.Recipe;
 import ca.gbc.yumoid.recipe.model.User;
 import ca.gbc.yumoid.recipe.repositories.SearchRepository;
 import ca.gbc.yumoid.recipe.services.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,25 +23,23 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Objects;
 
-//@RequestMapping("/registered")
 @RequestMapping("/registered")
 @Controller
 public class RegisteredController {
 
-    @Autowired
-    private UserService userService;
+    final private UserService userService;
+    final private RecipeService recipeService;
+    final private SearchService searchService;
+    final private MealService mealService;
+    final private SearchRepository searchRepository;
 
-    @Autowired
-    private RecipeService recipeService;
-
-    @Autowired
-    private SearchService searchService;
-
-    @Autowired
-    private MealService mealService;
-
-    @Autowired
-    SearchRepository searchRepository;
+    public RegisteredController(UserService userService, RecipeService recipeService, SearchService searchService, MealService mealService, SearchRepository searchRepository) {
+        this.userService = userService;
+        this.recipeService = recipeService;
+        this.searchService = searchService;
+        this.mealService = mealService;
+        this.searchRepository = searchRepository;
+    }
 
     @RequestMapping({"", "/", "index", "index.html"})
     public String index() {
@@ -67,8 +64,6 @@ public class RegisteredController {
 
     @PostMapping( "/updateRecipe/{id}")
     public String updateRecipe(Model model, @PathVariable Long id) {
-//        Recipe recipe = recipeService.getRecipeById(id);
-//        recipeService.markedAsFavorite(recipe);
         recipeService.markedAsFavoriteByID(id);
         return "redirect:/registered/view-recipe";
     }

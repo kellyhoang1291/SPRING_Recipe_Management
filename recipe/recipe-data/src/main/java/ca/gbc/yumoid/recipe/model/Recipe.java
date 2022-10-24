@@ -27,6 +27,7 @@ public class Recipe {
     private int totalTime;
     @Lob
     private String ingredients;
+    private String steps;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateAdded;
 
@@ -41,8 +42,6 @@ public class Recipe {
     private User createdUser;
 
 
-    private String steps;
-
     public Recipe() {
     }
 
@@ -52,6 +51,7 @@ public class Recipe {
         this.prepTime = prepTime;
         this.cookTime = cookTime;
         this.totalTime = totalTime;
+        this.ingredients = ingredients;
         this.steps = steps;
         this.dateAdded = dateAdded;
     }
@@ -154,13 +154,14 @@ public class Recipe {
         return "Recipe{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", prepTime='" + prepTime + '\'' +
-                ", cookTime='" + cookTime + '\'' +
-                ", totalTime='" + totalTime + '\'' +
-                ", ingredients=" + ingredients +
+                ", prepTime=" + prepTime +
+                ", cookTime=" + cookTime +
+                ", totalTime=" + totalTime +
+                ", ingredients='" + ingredients + '\'' +
                 ", steps='" + steps + '\'' +
-                ", CreatedBy=" + createdUser +
+                ", dateAdded=" + dateAdded +
                 ", likedByUsers=" + likedByUsers +
+                ", createdUser=" + createdUser +
                 '}';
     }
 

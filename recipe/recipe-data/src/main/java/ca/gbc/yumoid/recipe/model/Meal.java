@@ -101,7 +101,7 @@ public class Meal {
         return "Meal{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", dateAdded=" + date +
+                ", date=" + date +
                 ", user=" + user +
                 ", recipe=" + recipe +
                 '}';

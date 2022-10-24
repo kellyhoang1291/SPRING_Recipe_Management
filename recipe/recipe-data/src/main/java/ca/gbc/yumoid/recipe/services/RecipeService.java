@@ -11,7 +11,6 @@ package ca.gbc.yumoid.recipe.services;
 import ca.gbc.yumoid.recipe.model.Recipe;
 import ca.gbc.yumoid.recipe.repositories.RecipeRepository;
 import ca.gbc.yumoid.recipe.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -21,11 +20,14 @@ import java.time.LocalDate;
 @Service
 public class RecipeService {
 
-    @Autowired
-    private RecipeRepository recipeRepository;
+    final private RecipeRepository recipeRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    final private UserRepository userRepository;
+
+    public RecipeService(RecipeRepository recipeRepository, UserRepository userRepository) {
+        this.recipeRepository = recipeRepository;
+        this.userRepository = userRepository;
+    }
 
     public Recipe getRecipeById(Long id){
         return recipeRepository.getRecipeById(id);

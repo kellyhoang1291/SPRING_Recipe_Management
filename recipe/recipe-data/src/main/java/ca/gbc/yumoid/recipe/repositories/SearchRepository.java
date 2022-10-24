@@ -12,9 +12,11 @@ import ca.gbc.yumoid.recipe.model.Meal;
 import ca.gbc.yumoid.recipe.model.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface SearchRepository extends JpaRepository<Recipe, Long> {
     @Query("SELECT r FROM Recipe r WHERE LOWER(CONCAT(r.name, r.ingredients, r.steps)) LIKE LOWER(concat('%', concat(:keyword, '%')))")
     List<Recipe> search(String keyword);

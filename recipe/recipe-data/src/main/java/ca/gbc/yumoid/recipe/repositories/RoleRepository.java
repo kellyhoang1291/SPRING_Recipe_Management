@@ -10,9 +10,11 @@ package ca.gbc.yumoid.recipe.repositories;
 
 import ca.gbc.yumoid.recipe.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
+@Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
     public Set<Role> findByName(String user);
 }

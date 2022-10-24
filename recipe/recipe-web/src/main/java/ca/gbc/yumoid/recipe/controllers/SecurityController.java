@@ -10,21 +10,19 @@ package ca.gbc.yumoid.recipe.controllers;
 
 import ca.gbc.yumoid.recipe.model.User;
 import ca.gbc.yumoid.recipe.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class SecurityController {
-
-    @Autowired
-    private UserService userService;
+    final private UserService userService;
+    public SecurityController(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping({"/register", "register.html"})
     public String index(Model model) {

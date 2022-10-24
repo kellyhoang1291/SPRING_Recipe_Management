@@ -8,11 +8,9 @@
  * security authentication.
  **********************************************************************************/
 package ca.gbc.yumoid.recipe.services;
-
 import ca.gbc.yumoid.recipe.model.User;
 import ca.gbc.yumoid.recipe.repositories.RoleRepository;
 import ca.gbc.yumoid.recipe.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.HashSet;
@@ -20,11 +18,14 @@ import java.util.HashSet;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    final private UserRepository userRepository;
 
-    @Autowired
-    private RoleRepository roleRepository;
+    final private RoleRepository roleRepository;
+
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+    }
 
     public User getUserByUsername(String username){
         return userRepository.getUserByUsername(username);

@@ -11,7 +11,6 @@ package ca.gbc.yumoid.recipe.services;
 import ca.gbc.yumoid.recipe.model.Meal;
 import ca.gbc.yumoid.recipe.repositories.MealRepository;
 import ca.gbc.yumoid.recipe.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -23,11 +22,14 @@ import java.util.List;
 @Transactional
 public class MealService {
 
-    @Autowired
-    private UserRepository userRepository;
+    final private UserRepository userRepository;
 
-    @Autowired
-    private MealRepository mealRepository;
+    final private MealRepository mealRepository;
+
+    public MealService(UserRepository userRepository, MealRepository mealRepository) {
+        this.userRepository = userRepository;
+        this.mealRepository = mealRepository;
+    }
 
     public void save(Meal meal){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

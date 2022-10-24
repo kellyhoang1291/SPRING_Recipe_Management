@@ -10,7 +10,6 @@ package ca.gbc.yumoid.recipe.services;
 
 import ca.gbc.yumoid.recipe.model.Recipe;
 import ca.gbc.yumoid.recipe.repositories.SearchRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +17,11 @@ import java.util.List;
 @Service
 public class SearchService {
 
-    @Autowired
-    private SearchRepository searchRepository;
+    final private SearchRepository searchRepository;
+
+    public SearchService(SearchRepository searchRepository) {
+        this.searchRepository = searchRepository;
+    }
 
     public List<Recipe> listAll(String keyword){
         if(keyword != null){

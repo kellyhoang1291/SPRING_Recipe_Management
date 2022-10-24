@@ -175,7 +175,11 @@ public class User {
                 ", postalCode='" + postalCode + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", enabled=" + enabled +
                 ", likedRecipes=" + likedRecipes +
+                ", roles=" + roles +
+                ", recipes=" + recipes +
+                ", meals=" + meals +
                 '}';
     }
 
