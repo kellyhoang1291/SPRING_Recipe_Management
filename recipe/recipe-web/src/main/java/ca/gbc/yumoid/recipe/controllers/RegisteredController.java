@@ -44,7 +44,7 @@ public class RegisteredController {
 
     //RECIPE ===================================================================================================
     //Load recipe
-    @RequestMapping({"recipe/view","/view-recipe" })
+    @RequestMapping({"/view-recipe", "view-recipe.html"})
     public String viewRecipe(Model model) {
         List<Recipe> listRecipes = searchService.listAll("");
         model.addAttribute("recipes", listRecipes);
@@ -52,7 +52,7 @@ public class RegisteredController {
     }
 
     //Create recipe
-    @RequestMapping({"recipe/create", "/create-recipe"})
+    @RequestMapping({"/create", "/create-recipe", "create-recipe.html"})
     public String create(Model model) {
         Recipe recipe = new Recipe();
         model.addAttribute("recipe", recipe);
@@ -68,45 +68,20 @@ public class RegisteredController {
 
     //Like Recipe
     @PostMapping( "/updateRecipe/{id}")
-    public String updateRecipe(@PathVariable Long id) {
+    public String updateRecipe(Model model, @PathVariable Long id) {
         recipeService.markedAsFavoriteByID(id);
         return "redirect:/registered/view-recipe";
     }
 
-    //Search Recipe
-    @RequestMapping(value = {"recipe/search", "/search-recipe", }, method = RequestMethod.GET)
-    public String search(Model model) {
-        model.addAttribute("recipe", new Recipe());
-        return "registered/recipe/search";
-    }
-
-    @RequestMapping(value = {"recipe/search", "/search-recipe", }, method = RequestMethod.POST)
-    public String search(HttpServletRequest request, Model model) {
-        String keyword = request.getParameter("name");
-        model.addAttribute("keyword", "Keyword: " + keyword);
-
-        List<Recipe> matchedRecipes = searchService.listAll(keyword);
-        model.addAttribute("nameCount", -1);
-        model.addAttribute("count", matchedRecipes.size());
-
-        //check if any recipes found
-        if (matchedRecipes.size() > 0) {
-            model.addAttribute("recipes", matchedRecipes);
-        } else {
-            model.addAttribute("message", "No recipe found. Please try different keyword.");
-        }
-        return "registered/recipe/search";
-    }
-
     //MEAL
     //Load meals
-    @RequestMapping({"meal/view", "/plan-meal", })
+    @RequestMapping({"/plan", "/plan-meal", "plan-meal.html"})
     public String plan(Model model, Authentication authentication) {
         model.addAttribute("userMeals", searchRepository.findMealByUsername(authentication.getName()));
         return "registered/meal/view";
     }
     //Create meals
-    @RequestMapping({"meal/create","/create-meal"})
+    @RequestMapping({"/create-meal", "create-meal.html"})
     public String createMeal(Model model) {
         Meal meal = new Meal();
         model.addAttribute("meal", meal);
@@ -122,20 +97,45 @@ public class RegisteredController {
         return "registered/meal/view";
     }
 
+
     //USER
     //View Profile
-    @RequestMapping({"user/view-profile"})
+    @RequestMapping({"/view-profile", "view-profile.html"})
     public String viewProfile(Model model, Authentication authentication) {
         model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
         model.addAttribute("userRecipes", searchRepository.findRecipeByUsername(authentication.getName()));
         return "registered/user/view-profile";
     }
     //View Created & Favorite Recipe
-    @RequestMapping({"user/view-created-recipes"})
+    @RequestMapping({"/view-created-recipes", "view-created-recipes.html"})
     public String viewUserRecipes(Model model, Authentication authentication) {
         model.addAttribute("userRecipes", searchRepository.findRecipeByUsername(authentication.getName()));
         return "registered/user/view-created-recipes";
     }
 
 
+    // SEARCH
+    @RequestMapping(value = {"search", "/search-recipe", "/search-recipe.html"}, method = RequestMethod.GET)
+    public String search(Model model) {
+        model.addAttribute("recipe", new Recipe());
+        return "registered/recipe/search";
+    }
+
+    @RequestMapping(value = {"search", "/search-recipe", "/search-recipe.html"}, method = RequestMethod.POST)
+    public String search(HttpServletRequest request, Model model) {
+        String keyword = request.getParameter("name");
+        model.addAttribute("searchString", "Keyword: " + keyword);
+
+        List<Recipe> matchedRecipes = searchService.listAll(keyword);
+        model.addAttribute("nameCount", -1);
+        model.addAttribute("count", matchedRecipes.size());
+
+        //check if any recipes found
+        if (matchedRecipes.size() > 0) {
+            model.addAttribute("recipes", matchedRecipes);
+        } else {
+            model.addAttribute("message", "No recipe found. Please try different keyword.");
+        }
+        return "registered/recipe/search";
+    }
 }
