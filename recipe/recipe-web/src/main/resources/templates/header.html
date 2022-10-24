@@ -20,19 +20,19 @@
                         <a class="nav-link"
                            th:classappend="${#httpServletRequest.getRequestURI() == '/registered/recipe/create' ? 'active':''}"
                            th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/recipe/create' ? 'page':''}"
-                           th:href="@{/registered/create-recipe}" th:text="'Create Recipe'"></a>
+                           th:href="@{/registered/recipe/create}" th:text="'Create Recipe'"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
                            th:classappend="${#httpServletRequest.getRequestURI() == '/registered/recipe/view' ? 'active':''}"
                            th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/recipe/view' ? 'page':''}"
-                           th:href="@{/registered/view-recipe}" th:text="'View Recipes'"></a>
+                           th:href="@{/registered/recipe/view}" th:text="'View Recipes'"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
                            th:classappend="${#httpServletRequest.getRequestURI() == '/registered/recipe/search' ? 'active':''}"
                            th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/recipe/search' ? 'page':''}"
-                           th:href="@{/registered/search-recipe}" th:text="'Search Recipes'"></a>
+                           th:href="@{/registered/recipe/search}" th:text="'Search Recipes'"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"

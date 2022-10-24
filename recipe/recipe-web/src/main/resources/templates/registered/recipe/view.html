@@ -15,10 +15,6 @@
 <h1>View Recipes</h1>
 <div class="container p-5 mt-2">
     <a class="btn btn-lg btn-dark" th:href="@{/registered/recipe/create}" th:text="'Create Recipe'"></a>
-<!--    <form th:action="@{/registered/create-recipe}" method="post">-->
-<!--        <button class="btn btn-lg btn-dark" th:text="'Create Recipe'"></button>-->
-<!--    </form>-->
-<!--    -->
     <table class="table">
         <thead>
         <tr>
@@ -43,7 +39,7 @@
             <td th:text="${recipe.dateAdded}"></td>
             <td th:text="${recipe.createdUser.firstName} + ' ' + ${recipe.createdUser.lastName}"></td>
             <td>
-                <form th:action="@{'/registered/updateRecipe/' + ${recipe.id}}" method="post">
+                <form th:action="@{'/registered/recipe/update/' + ${recipe.id}}" method="post">
                         <button class="btn btn-lg btn-dark" type="submit" th:text="'Like'"></button>
                 </form>
             </td>

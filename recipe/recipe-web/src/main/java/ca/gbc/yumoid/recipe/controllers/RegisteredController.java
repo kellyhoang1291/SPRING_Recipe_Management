@@ -22,7 +22,6 @@ import java.util.List;
 @RequestMapping("/registered")
 @Controller
 public class RegisteredController {
-
     final private UserService userService;
     final private RecipeService recipeService;
     final private SearchService searchService;
@@ -37,14 +36,14 @@ public class RegisteredController {
         this.searchRepository = searchRepository;
     }
 
-    @RequestMapping({"", "/", "index", "index.html"})
+    @RequestMapping({"", "/", "index"})
     public String index() {
         return "registered/index";
     }
 
     //RECIPE ===================================================================================================
     //Load recipe
-    @RequestMapping({"recipe/view","/view-recipe" })
+    @RequestMapping({"recipe/view"})
     public String viewRecipe(Model model) {
         List<Recipe> listRecipes = searchService.listAll("");
         model.addAttribute("recipes", listRecipes);
@@ -52,35 +51,35 @@ public class RegisteredController {
     }
 
     //Create recipe
-    @RequestMapping({"recipe/create", "/create-recipe"})
+    @RequestMapping({"recipe/create"})
     public String create(Model model) {
         Recipe recipe = new Recipe();
         model.addAttribute("recipe", recipe);
         return "registered/recipe/create";
     }
 
-    @PostMapping(value = "/saveRecipe")
+    @PostMapping(value = "recipe/save")
     public String saveRecipe(Model model, Recipe recipe, Authentication authentication) {
         recipeService.save(recipe);
         model.addAttribute("userRecipes", searchRepository.findRecipeByUsername(authentication.getName()));
-        return "redirect:/registered/view-recipe";
+        return "redirect:/registered/recipe/view";
     }
 
     //Like Recipe
-    @PostMapping( "/updateRecipe/{id}")
+    @PostMapping( "recipe/update/{id}")
     public String updateRecipe(@PathVariable Long id) {
         recipeService.markedAsFavoriteByID(id);
-        return "redirect:/registered/view-recipe";
+        return "redirect:/registered/recipe/view";
     }
 
     //Search Recipe
-    @RequestMapping(value = {"recipe/search", "/search-recipe", }, method = RequestMethod.GET)
+    @RequestMapping(value = {"recipe/search"}, method = RequestMethod.GET)
     public String search(Model model) {
         model.addAttribute("recipe", new Recipe());
         return "registered/recipe/search";
     }
 
-    @RequestMapping(value = {"recipe/search", "/search-recipe", }, method = RequestMethod.POST)
+    @RequestMapping(value = {"recipe/search"}, method = RequestMethod.POST)
     public String search(HttpServletRequest request, Model model) {
         String keyword = request.getParameter("name");
         model.addAttribute("keyword", "Keyword: " + keyword);
@@ -100,13 +99,13 @@ public class RegisteredController {
 
     //MEAL
     //Load meals
-    @RequestMapping({"meal/view", "/plan-meal", })
+    @RequestMapping({"meal/view"})
     public String plan(Model model, Authentication authentication) {
         model.addAttribute("userMeals", searchRepository.findMealByUsername(authentication.getName()));
         return "registered/meal/view";
     }
     //Create meals
-    @RequestMapping({"meal/create","/create-meal"})
+    @RequestMapping({"meal/create"})
     public String createMeal(Model model) {
         Meal meal = new Meal();
         model.addAttribute("meal", meal);
@@ -115,7 +114,7 @@ public class RegisteredController {
         return "registered/meal/create";
     }
 
-    @PostMapping(value = "/saveMeal")
+    @PostMapping(value = "meal/save")
     public String saveMeal(Meal meal, Authentication authentication, Model model) {
         mealService.save(meal);
         model.addAttribute("userMeals", searchRepository.findMealByUsername(authentication.getName()));
