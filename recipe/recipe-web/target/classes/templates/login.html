@@ -18,12 +18,12 @@
     </style>
 </head>
 <body class="text-center">
-<main class="form-signin">
+<main class="">
     <form th:action="@{/login}" method="post">
         <div th:if="${param.error}">
-            <div class="alert alert-danger" th:text="'Error! Invalid username or password!'"></div>
+            <div class="" th:text="'Error! Invalid username or password!'"></div>
         </div>
-        <h1 class="h3 mb-3 fw-normal" th:text="'Please Sign In'"></h1>
+        <h1 class="" th:text="'Welcome to Yumoid'"></h1>
 
         <div class="form-floating">
             <input type="text" class="form-control" id="username" placeholder="Username" name="username"
@@ -40,23 +40,14 @@
             <label for="password" th:text="'Password'"></label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-dark" type="submit" th:text="'Sign In'"></button>
+        <button class="" type="submit" th:text="'Log In'"></button>
     </form>
     <br>
-    <form th:action="@{/register}">
-        <button class="w-100 btn btn-lg btn-dark" type="submit" th:text="'Register'"></button>
+    <form th:action="@{/register}" th:method="post">
+        <p>Do not have an account? <a href="register" th:text="'Sign up'" /> </p>
+
     </form>
-    <p class="mt-5 mb-3 text-muted">&copy; 2022 </p>
+    <p class="">&copy; Modulix - 2022 </p>
 </main>
-<script>
-    function myFunction() {
-        let x = document.getElementById("password");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }
-    }
-</script>
 </body>
 </html>

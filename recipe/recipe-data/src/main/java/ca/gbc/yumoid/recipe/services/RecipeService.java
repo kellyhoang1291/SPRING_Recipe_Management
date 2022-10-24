@@ -34,6 +34,7 @@ public class RecipeService {
     public void save(Recipe recipe){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         recipe.setCreatedUser(userRepository.getUserByUsername(authentication.getName()));
+        recipe.getLikedByUsers().add(userRepository.getUserByUsername(authentication.getName()));
         recipe.setDateAdded(LocalDate.now());
         recipe.setTotalTime(recipe.getPrepTime() + recipe.getCookTime());
         recipeRepository.save(recipe);

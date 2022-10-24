@@ -45,6 +45,18 @@ VALUES (2, 3);
 INSERT INTO users_recipes (user_id, recipe_id)
 VALUES (2, 4);
 
+INSERT INTO recipe_like (user_id, recipe_id)
+VALUES (1, 1);
+
+INSERT INTO recipe_like (user_id, recipe_id)
+VALUES (2, 2);
+
+INSERT INTO recipe_like (user_id, recipe_id)
+VALUES (2, 3);
+
+INSERT INTO recipe_like (user_id, recipe_id)
+VALUES (2, 4);
+
 -- add meals
 INSERT INTO meal (id, date, name)
 VALUES (1, '2022-11-07', 'Breakfast');
