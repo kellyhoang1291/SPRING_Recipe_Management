@@ -13,7 +13,7 @@
 <body class="text-center">
 
 <h1>Recipe Search</h1>
-<form th:action="@{/registered/search}" th:object="${recipe}" method="post">
+<form th:action="@{/registered/recipe/search}" th:object="${recipe}" method="post">
     <div class="row mb-3">
         <label class="col-sm-2"></label><label class="col-sm-2"></label>
         <div class="col-5">
@@ -23,7 +23,7 @@
     <div class="row mb-3">
         <label class="col-sm-2"></label><label class="col-sm-2"></label>
         <div class="col-sm-4">
-            <p th:text="${searchString}"></p>
+            <p th:text="${keyword}"></p>
             <button class="btn btn-lg btn-dark" type="submit" th:text="Search"></button>
         </div>
     </div>
