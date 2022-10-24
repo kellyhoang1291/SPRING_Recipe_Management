@@ -47,13 +47,6 @@
                            th:href="@{/registered/plan-meal}" th:text="'Plan Meal'"></a>
                     </li>
                     <li class="nav-item">
-<!--                        <a class="nav-link"-->
-<!--                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/plan-meal' ? 'active':''}"-->
-<!--                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/plan-meal' ? 'page':''}"-->
-<!--                           th:href="@{/registered/plan-meal}" th:text="'Plan Meal'"></a>-->
-<!--                        <form th:action="@{/doLogout}" method="post">-->
-<!--                            <a class="nav-link" th:text="'Logout'"></a>-->
-<!--                        </form>-->
                         <form th:action="@{/doLogout}" method="post">
                             <button class="" type="submit" th:text="'Logout'"></button>
                         </form>
