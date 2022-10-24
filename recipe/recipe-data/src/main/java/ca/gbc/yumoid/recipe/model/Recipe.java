@@ -9,12 +9,9 @@
 package ca.gbc.yumoid.recipe.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Recipe {
@@ -25,7 +22,6 @@ public class Recipe {
     private int prepTime;
     private int cookTime;
     private int totalTime;
-    @Lob
     private String ingredients;
     private String steps;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -42,8 +38,7 @@ public class Recipe {
     private User createdUser;
 
 
-    public Recipe() {
-    }
+    public Recipe() {}
 
     public Recipe(Long id, String name, int prepTime, int cookTime, int totalTime, String ingredients, String steps, LocalDate dateAdded) {
         this.id = id;

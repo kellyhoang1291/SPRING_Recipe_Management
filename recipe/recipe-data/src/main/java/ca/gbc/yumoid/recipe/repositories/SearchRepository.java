@@ -21,13 +21,8 @@ public interface SearchRepository extends JpaRepository<Recipe, Long> {
     @Query("SELECT r FROM Recipe r WHERE LOWER(CONCAT(r.name, r.ingredients, r.steps)) LIKE LOWER(concat('%', concat(:keyword, '%')))")
     List<Recipe> search(String keyword);
 
-//    @Query("SELECT r FROM Recipe r WHERE r.createdUser.username LIKE %?1%")
-//    List<Recipe> findByUsername(String userName);
-
     @Query("SELECT r FROM Recipe r JOIN r.likedByUsers u WHERE u.username LIKE %?1% ")
     List<Recipe> findRecipeByUsername(String userName);
-
-//    @Query("SELECT r FROM Recipe r JOIN r.likedByUsers u where u.username LIKE %?1%")
 
     @Query("SELECT m FROM Meal m WHERE m.user.username LIKE %?1%")
     List<Meal> findMealByUsername(String userName);

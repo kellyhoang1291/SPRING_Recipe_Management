@@ -9,16 +9,7 @@
 package ca.gbc.yumoid.recipe.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -106,7 +97,6 @@ public class Meal {
                 ", recipe=" + recipe +
                 '}';
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -21,9 +21,7 @@ import java.util.List;
 @Service
 @Transactional
 public class MealService {
-
     final private UserRepository userRepository;
-
     final private MealRepository mealRepository;
 
     public MealService(UserRepository userRepository, MealRepository mealRepository) {

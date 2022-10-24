@@ -9,9 +9,7 @@
 package ca.gbc.yumoid.recipe.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class User {

@@ -19,9 +19,7 @@ import java.time.LocalDate;
 
 @Service
 public class RecipeService {
-
     final private RecipeRepository recipeRepository;
-
     final private UserRepository userRepository;
 
     public RecipeService(RecipeRepository recipeRepository, UserRepository userRepository) {
