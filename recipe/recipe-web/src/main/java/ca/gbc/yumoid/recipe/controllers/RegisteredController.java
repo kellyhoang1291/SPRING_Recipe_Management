@@ -59,30 +59,22 @@ public class RegisteredController {
     @PostMapping(value = "/saveRecipe")
     public String saveRecipe(Model model, Recipe recipe, Authentication authentication) {
         recipeService.save(recipe);
-        model.addAttribute("userRecipes", searchRepository.findByUsername(authentication.getName()));
-        return "redirect:/registered/view-recipe";
-    }
-    @RequestMapping({"/like-recipe/{id}"})
-    public String editRecipe(Model model, Authentication authentication, @PathVariable Long id) {
-        Recipe recipe = recipeService.getRecipeById(id);
-        recipe.getLikedByUsers().add(userService.getUserByUsername(authentication.getName()));
-        model.addAttribute("recipe", recipe);
+        model.addAttribute("userRecipes", searchRepository.findRecipeByUsername(authentication.getName()));
         return "redirect:/registered/view-recipe";
     }
 
-    @PostMapping(value = "/updateRecipe")
-    public String updateRecipe(Recipe recipe, Model model) {
-        recipeService.save(recipe);
-        List<Recipe> listRecipes = searchService.listAll("");
-        model.addAttribute("recipes", listRecipes);
-        return "/registered/view-created-recipes";
+
+    @PostMapping( "/updateRecipe/{id}")
+    public String updateRecipe(Model model, @PathVariable Long id) {
+//        Recipe recipe = recipeService.getRecipeById(id);
+//        recipeService.markedAsFavorite(recipe);
+        recipeService.markedAsFavoriteByID(id);
+        return "redirect:/registered/view-recipe";
     }
-
-
 
     @RequestMapping({"/plan", "/plan-meal", "plan-meal.html"})
     public String plan(Model model, Authentication authentication) {
-        model.addAttribute("userMeals", searchRepository.findByUser(authentication.getName()));
+        model.addAttribute("userMeals", searchRepository.findMealByUsername(authentication.getName()));
         return "registered/plan-meal";
     }
 
@@ -98,7 +90,7 @@ public class RegisteredController {
     @PostMapping(value = "/saveMeal")
     public String saveMeal(Meal meal, Authentication authentication, Model model) {
         mealService.save(meal);
-        model.addAttribute("userMeals", searchRepository.findByUser(authentication.getName()));
+        model.addAttribute("userMeals", searchRepository.findMealByUsername(authentication.getName()));
         return "registered/plan-meal";
     }
 
@@ -126,7 +118,7 @@ public class RegisteredController {
     @RequestMapping({"/view-profile", "view-profile.html"})
     public String viewProfile(Model model, Authentication authentication) {
         model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
-        model.addAttribute("userRecipes", searchRepository.findByUsername(authentication.getName()));
+        model.addAttribute("userRecipes", searchRepository.findRecipeByUsername(authentication.getName()));
         return "registered/view-profile";
     }
 
@@ -154,7 +146,7 @@ public class RegisteredController {
 
     @RequestMapping({"/view-created-recipes", "view-created-recipes.html"})
     public String viewUserRecipes(Model model, Authentication authentication) {
-        model.addAttribute("userRecipes", searchRepository.findByUsername(authentication.getName()));
+        model.addAttribute("userRecipes", searchRepository.findRecipeByUsername(authentication.getName()));
         return "registered/view-created-recipes";
     }
 }

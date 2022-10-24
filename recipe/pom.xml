@@ -13,14 +13,14 @@
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>ca.gbc.yumiod</groupId>
+    <groupId>ca.gbc.yumoid</groupId>
     <artifactId>recipe</artifactId>
     <version>0.0.4-SNAPSHOT</version>
     <name>recipe</name>
     <description>recipe</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <scm>

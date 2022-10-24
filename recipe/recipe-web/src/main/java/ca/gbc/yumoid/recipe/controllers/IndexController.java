@@ -40,14 +40,14 @@ public class IndexController {
             return "/register";
         }
         userService.save(user);
-        return "/login";
+        return "login";
     }
 
     @RequestMapping(value = {"", "/", "/login", "/login.html"}, method = RequestMethod.GET)
     public String showLoginPage() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            return "/login";
+            return "login";
         }
         return "redirect:/registered/";
     }

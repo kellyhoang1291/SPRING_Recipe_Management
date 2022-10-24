@@ -24,7 +24,7 @@
       <th>Ingredients</th>
       <th>Steps</th>
       <th>Date Added</th>
-      <th>Author</th>
+      <th>Created By</th>
     </tr>
     </thead>
     <tbody>
@@ -36,7 +36,7 @@
       <td th:text="${recipe.ingredients}"></td>
       <td th:text="${recipe.steps}"></td>
       <td th:text="${recipe.dateAdded}"></td>
-      <td th:text="${recipe.author.firstName} + ' ' + ${recipe.author.lastName}"></td>
+      <td th:text="${recipe.createdUser.firstName} + ' ' + ${recipe.createdUser.lastName}"></td>
     </tr>
     </tbody>
   </table>

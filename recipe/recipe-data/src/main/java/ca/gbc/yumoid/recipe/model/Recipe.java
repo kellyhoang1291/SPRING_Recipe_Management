@@ -37,8 +37,8 @@ public class Recipe {
     private Set<User> likedByUsers = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "users_recipes", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
-    private User author;
+    @JoinTable(name = "users_recipes", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private User createdUser;
 
 
     private String steps;
@@ -56,7 +56,7 @@ public class Recipe {
         this.dateAdded = dateAdded;
     }
 
-    public Recipe(Long id, String name, int prepTime, int cookTime, int totalTime, String ingredients, String steps, LocalDate dateAdded, Set<User> likedByUsers, User author) {
+    public Recipe(Long id, String name, int prepTime, int cookTime, int totalTime, String ingredients, String steps, LocalDate dateAdded, Set<User> likedByUsers, User createdUser) {
         this.id = id;
         this.name = name;
         this.prepTime = prepTime;
@@ -66,7 +66,7 @@ public class Recipe {
         this.steps = steps;
         this.dateAdded = dateAdded;
         this.likedByUsers = likedByUsers;
-        this.author = author;
+        this.createdUser = createdUser;
     }
 
     public Long getId() {
@@ -133,12 +133,12 @@ public class Recipe {
         this.likedByUsers = likedByUsers;
     }
 
-    public User getAuthor() {
-        return author;
+    public User getCreatedUser() {
+        return createdUser;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setCreatedUser(User createdUser) {
+        this.createdUser = createdUser;
     }
 
     public String getSteps() {
@@ -159,7 +159,7 @@ public class Recipe {
                 ", totalTime='" + totalTime + '\'' +
                 ", ingredients=" + ingredients +
                 ", steps='" + steps + '\'' +
-                ", author=" + author +
+                ", CreatedBy=" + createdUser +
                 ", likedByUsers=" + likedByUsers +
                 '}';
     }

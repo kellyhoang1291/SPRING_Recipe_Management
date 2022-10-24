@@ -33,9 +33,19 @@ public class RecipeService {
 
     public void save(Recipe recipe){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        recipe.setAuthor(userRepository.getUserByUsername(authentication.getName()));
+        recipe.setCreatedUser(userRepository.getUserByUsername(authentication.getName()));
         recipe.setDateAdded(LocalDate.now());
         recipe.setTotalTime(recipe.getPrepTime() + recipe.getCookTime());
+        recipeRepository.save(recipe);
+    }
+
+    public void markedAsFavoriteByID(Long id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Recipe recipe = recipeRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Recipe with id " + id + " does not exists"
+                ));
+        recipe.getLikedByUsers().add(userRepository.getUserByUsername(authentication.getName()));
         recipeRepository.save(recipe);
     }
 
