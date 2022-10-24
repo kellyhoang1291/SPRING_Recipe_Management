@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/registered")
 @Controller
 public class HomeController {
-    @RequestMapping({"", "/", "index"})
+    @RequestMapping({"", "/", "/index"})
     public String index() {
         return "registered/index";
     }
-
 
 }
