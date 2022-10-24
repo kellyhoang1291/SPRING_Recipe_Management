@@ -13,6 +13,7 @@ import ca.gbc.yumoid.recipe.model.Recipe;
 import ca.gbc.yumoid.recipe.repositories.SearchRepository;
 import ca.gbc.yumoid.recipe.services.RecipeService;
 import ca.gbc.yumoid.recipe.services.SearchService;
+import ca.gbc.yumoid.recipe.services.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.security.core.Authentication;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -31,18 +33,22 @@ public class RecipeController {
     final private SearchService searchService;
     final private SearchRepository searchRepository;
 
-    public RecipeController(RecipeService recipeService, SearchService searchService, SearchRepository searchRepository) {
+    final private UserService userService;
+
+    public RecipeController(UserService userService, RecipeService recipeService, SearchService searchService, SearchRepository searchRepository) {
         this.recipeService = recipeService;
         this.searchService = searchService;
         this.searchRepository = searchRepository;
+        this.userService = userService;
     }
 
 
     //RECIPE ===================================================================================================
     //Load recipe
     @RequestMapping({"/view"})
-    public String viewRecipe(Model model) {
+    public String viewRecipe(Model model, Authentication authentication) {
         List<Recipe> listRecipes = searchService.listAll("");
+        model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
         model.addAttribute("recipes", listRecipes);
         return "registered/recipe/view";
     }

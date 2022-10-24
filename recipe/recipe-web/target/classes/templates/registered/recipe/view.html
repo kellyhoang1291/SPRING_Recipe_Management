@@ -38,9 +38,10 @@
             <td th:text="${recipe.dateAdded}"></td>
             <td th:text="${recipe.createdUser.firstName} + ' ' + ${recipe.createdUser.lastName}"></td>
             <td>
-                <form th:action="@{'/registered/recipe/update/' + ${recipe.id}}" method="post">
+                <form th:unless="${recipe.getLikedByUsers().contains(user)}" th:action="@{'/registered/recipe/update/' + ${recipe.id}}" method="post">
                         <button class="btn btn-lg btn-dark" type="submit" th:text="'Like'"></button>
                 </form>
+                <button th:disabled="true" th:if="${recipe.getLikedByUsers().contains(user) and recipe.createdUser != user}" class="btn btn-lg btn-dark" type="submit" th:text="'Liked'"></button>
             </td>
         </tr>
         </tbody>
