@@ -16,16 +16,18 @@
         <div class="container py-5">
             <div class="row mb-4 mb-lg-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <p class="fw-bold text-success mb-2">Sign up</p>
-                    <h2 class="fw-bold">Welcome</h2>
+                    <h2 class="fw-bold">Welcome to Yumoid</h2>
+                    <p class="fw-bold text-success mb-2">Register Your Account</p>
+
                     <div th:if="${message != null}">
                         <div class="alert alert-danger" th:text="${message}"></div>
                     </div>
                 </div>
             </div>
             <div class="row d-flex justify-content-center">
-                <div class="col-md-6 col-xl-6">
+                <div class="col-md-6 col-xl-4">
                     <div class="card">
+                        <br>
                         <div class="card-body text-center d-flex flex-column align-items-center shadow">
                             <div> <span
                                     class="bs-icon-lg d-flex justify-content-center align-items-center me-2 bs-icon pb-2"><svg
@@ -36,60 +38,41 @@
                                     style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 61px; white-space: pre;"
                                     x="148.163" y="122.205">Y</text>
                         </svg></span></div>
+                            <br>
                                 <form th:action="@{/save}" th:object="${user}" method="post">
-                                    <div class="row mb-3">
-
-                                        <div class="col">
-                                            <label class="" th:text="'First Name:'"></label>
-                                            <input type="text" class="form-control" th:field="*{firstName}" th:required="true"
+                                    <div class="mb-3">
+                                            <input placeholder="First Name" type="text" class="form-control" th:field="*{firstName}" th:required="true"
                                                    th:oninvalid="this.setCustomValidity('First name required')"
                                                    th:oninput="this.setCustomValidity('')"/>
-                                        </div>
                                     </div>
-                                    <div class="row mb-3">
-
-                                        <div class="col">
-                                            <label class="" th:text="'Last Name:'"></label>
-                                            <input type="text" class="form-control" th:field="*{lastName}" th:required="true"
+                                    <div class="mb-3">
+                                            <input placeholder="Last Name" type="text" class="form-control" th:field="*{lastName}" th:required="true"
                                                    th:oninvalid="this.setCustomValidity('Last name required')"
                                                    th:oninput="this.setCustomValidity('')"/>
-                                        </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col">
-                                            <label class="" th:text="'Address:'"></label>
-                                            <input type="text" class="form-control" th:field="*{address}"/>
-                                        </div>
+                                    <div class="mb-3">
+                                            <input placeholder="Address"  type="text" class="form-control" th:field="*{address}"/>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col">
-                                            <label class="" th:text="'Postal Code:'"></label>
-                                            <input type="text" class="form-control" th:field="*{postalCode}"/>
-                                        </div>
+                                    <div class="mb-3">
+                                            <input placeholder="Postal Code" type="text" class="form-control" th:field="*{postalCode}"/>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col">
-                                            <label class="" th:text="'Username:'"></label>
-                                            <input type="text" class="form-control" th:field="*{username}" th:required="true" autocomplete="false"
+                                    <div class="mb-3">
+                                            <input placeholder="Username" type="text" class="form-control" th:field="*{username}" th:required="true" autocomplete="false"
                                                    th:oninvalid="this.setCustomValidity('Please enter username')"
                                                    th:oninput="this.setCustomValidity('')"/>
-                                        </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col">
-                                            <label class="" th:text="'Password:'"></label>
-                                            <input type="password" id="password" class="form-control" th:field="*{password}" th:required="true" autocomplete="false"
+                                    <div class="mb-3">
+                                            <input placeholder="Password" type="password" id="password" class="form-control" th:field="*{password}" th:required="true" autocomplete="false"
                                                    th:oninvalid="this.setCustomValidity('Please enter password')"
                                                    th:oninput="this.setCustomValidity('')"/>
-                                        </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <label class=""></label>
+                                    <div class="mb-3">
                                         <label class=""></label>
                                         <div class="">
                                             <button class="btn btn-primary shadow d-block w-100" style="background-color:#e88419 ;" type="submit" th:text="'Register'"></button>
                                             <p class="text-muted">Have an account?&nbsp;<a th:href="@{/login}">Sign in</a></p>
                                         </div>
+                                        <p class="text-muted">Modulix &copy; 2022</p>
                                     </div>
                                 </form>
                         </div>

@@ -26,6 +26,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
                     <div class="card">
+                        <br>
                         <div class="card-body text-center d-flex flex-column align-items-center shadow">
                             <div> <span
                                     class="bs-icon-lg d-flex justify-content-center align-items-center me-2 bs-icon pb-2"><svg
@@ -36,6 +37,7 @@
                                     style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 61px; white-space: pre;"
                                     x="148.163" y="122.205">Y</text>
                         </svg></span></div>
+                            <br>
                             <form th:action="@{/login}" method="post">
                                 <div th:if="${param.error}">
                                     <div class="alert alert-danger"
@@ -55,7 +57,7 @@
                                                           style="background-color: #e88419;" type="submit">Login</button></div>
                                 <p class="text-muted">Dont have an account?&nbsp;<a
                                         th:href="@{/register}">Register</a></p>
-                                <p class="text-muted">&copy; Modulix - 2022</p>
+                                <p class="text-muted">Modulix &copy; 2022</p>
                             </form>
                             <div style="height: 100px;"></div>
                         </div>
