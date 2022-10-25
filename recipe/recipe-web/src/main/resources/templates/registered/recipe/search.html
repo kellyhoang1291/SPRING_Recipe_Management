@@ -9,27 +9,30 @@
     <meta charset="UTF-8">
     <title>Search Recipe</title>
 </head>
-<body class="text-center">
+<body>
+    <div class="container px-4 py-5">
+        <h2 class="pb-2 border-bottom">
+            <div><span>Recipe search</span></div>
+        </h2>
 
-<h1>Recipe Search</h1>
 <form th:action="@{/registered/recipe/search}" th:object="${recipe}" method="post">
     <div class="row mb-3">
-        <label class="col-sm-2"></label><label class="col-sm-2"></label>
-        <div class="col-5">
+        <label class=""></label><label class="col-sm-0"></label>
+        <div class="col-8 text-center">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="name"/>
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-2"></label><label class="col-sm-2"></label>
-        <div class="col-sm-4">
+        <label class="col-sm-0"></label><label class="col-sm-0"></label>
+        <div class="col-sm-0">
             <p th:text="${searchString}"></p>
             <button class="btn btn-lg btn-dark" type="submit" th:text="Search"></button>
         </div>
     </div>
 </form>
 
-<div class="container p-5 mt-2" th:if="${count &gt; 0}">
-    <table class="table">
+<div class="container px-0" th:if="${count &gt; 0}">
+    <table class="table ">
         <thead>
         <tr>
             <th>Name</th>
@@ -58,6 +61,7 @@
 </div>
 <div class="container p-5 -mt-3" th:if="${count}==0 ">
     <h4 th:text="${message}"></h4>
+</div>
 </div>
 </body>
 </html>

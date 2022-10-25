@@ -9,10 +9,14 @@
     <meta charset="UTF-8">
     <title>View Planned Meals</title>
 </head>
-<body class="text-center">
-<h2 th:text="${#authentication.name} + '\'s Meals'" ></h2>
-<div class="container p-5 mt-2">
-    <table class="table">
+<body class="">
+    <div class="container p-5 mt-2">
+        <div>
+            <h2 class="pb-2 border-bottom">
+                <div><span th:text="${#authentication.name} + '\'s Meals'">test</span></div>
+            </h2>
+    </div>
+        <table class="table">
         <thead>
         <tr>
             <th>Name</th>
@@ -28,9 +32,9 @@
         </tr>
         </tbody>
     </table>
+    <form th:action="@{/registered/meal/create}" method="post">
+        <button class="btn btn-lg btn-dark" type="submit" th:text="'Plan New Meal'"></button>
+    </form>
 </div>
-<form th:action="@{/registered/meal/create}" method="post">
-    <button class="btn btn-lg btn-dark" type="submit" th:text="'Plan New Meal'"></button>
-</form>
 </body>
 </html>
