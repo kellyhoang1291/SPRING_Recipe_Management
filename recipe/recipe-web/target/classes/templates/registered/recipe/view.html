@@ -15,9 +15,9 @@
         <h2 class="pb-2 border-bottom">
             <div><span>All recipes</span></div>
         </h2>
-    <a class="btn btn-lg btn-dark" th:href="@{/registered/recipe/create}" th:text="'Create Recipe'"></a>
-    <table class="table">
-        <thead>
+    
+    <table class="table table-striped">
+        <thead class="table-dark">
         <tr>
             <th>Name</th>
             <th>Prep Time</th>
@@ -27,6 +27,7 @@
             <th>Steps</th>
             <th>Date Added</th>
             <th>Created By</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -48,6 +49,7 @@
         </tr>
         </tbody>
     </table>
+    <a class="btn btn-lg btn-dark" th:href="@{/registered/recipe/create}" th:text="'Create Recipe'"></a>
 </div>
 </body>
 </html>
