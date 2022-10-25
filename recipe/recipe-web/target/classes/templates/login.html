@@ -15,8 +15,8 @@
         <div class="container py-5">
             <div class="row mb-4 mb-lg-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h2 class="fw-bold text-success mb-2">Yumoid Login</h2>
-<!--                    <p class="fw-bold">Enter your username and password to login</p>-->
+                    <p class="fw-bold text-success mb-2">Yumoid Login</p>
+                    <h2 class="fw-bold">Login into your account</h2>
                 </div>
             </div>
             <div class="row d-flex justify-content-center">
@@ -28,7 +28,7 @@
                                 </svg></div>
                             <form th:action="@{/login}" method="post">
                                 <div th:if="${param.error}">
-                                    <div class="alert alert-danger" th:text="'Error! Invalid username or password!'"></div>
+                                    <div class="alert alert-danger" th:text="'Invalid username or password!'"></div>
                                 </div>
                                 <div class="mb-3"><input class="form-control" type="text" name="username" id="username" placeholder="Username"
                                     th:required="true"
@@ -42,8 +42,8 @@
                                     th:oninput="this.setCustomValidity('')">
 
                                 </div>
-                                <div class="mb-3"><button class="btn btn-primary shadow d-block w-100" type="submit">LOGIN</button></div>
-                                <p class="text-muted">Dont have an account?&nbsp;<a th:href="@{/register}">Sign up</a></p>
+                                <div class="mb-3"><button class="btn btn-primary shadow d-block w-100" type="submit">Login</button></div>
+                                <p class="text-muted">Dont have an account?&nbsp;<a th:href="@{/register}">Register An Account</a></p>
 
 
                             </form>
