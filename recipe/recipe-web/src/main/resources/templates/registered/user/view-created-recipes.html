@@ -10,11 +10,16 @@
   <title>View Profile</title>
 </head>
 <body class="text-center">
-<h2 th:text="'Welcome to ' + ${#authentication.name} + '\'s Recipes'" ></h2>
-<h2 th:text="${#authentication.name} + '\'s Recipes'" ></h2>
+
+<div class="container px-4 py-5 shadow" id="featured-2 ">
+  <h2 class="pb-2 border-bottom">
+      <div><span th:text="${#authentication.name} + '\'s Favourite Recipes'"></span></div>
+  </h2>
+
+
 <div class="container p-5 mt-2">
-  <table class="table">
-    <thead>
+  <table class="table table-striped">
+    <thead class="table-dark">
     <tr>
       <th>Name</th>
       <th>Prep Time</th>
@@ -39,6 +44,7 @@
     </tr>
     </tbody>
   </table>
+</div>
 </div>
 <br>
 <form th:action="@{/registered/user/view-profile}">

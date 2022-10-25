@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-2" th:text="'Prep Time (In minutes):'"></label>
+                <label class="col-sm-2" th:text="'Preparation Time:'"></label>
                 <div class="col-sm-8">
                     <input type="number" step="1" class="form-control" th:field="*{prepTime}" th:required="true"
                            th:oninvalid="this.setCustomValidity('Recipe prep time is required')"
@@ -39,7 +39,7 @@
             <label class="col-sm-2" th:text="'Cook Time (In minutes):'"></label>
             <div class="col-sm-8">
                 <input type="number" step="1" class="form-control" th:field="*{cookTime}" th:required="true"
-                       th:oninvalid="this.setCustomValidity('Recipe cook time is required')"
+                       th:oninvalid="this.setCustomValidity('Recipe cooking time is required')"
                        th:oninput="this.setCustomValidity('')"/>
             </div>
         </div>
@@ -47,7 +47,7 @@
             <label class="col-sm-2" th:text="'Ingredients:'"></label>
             <div class="col-sm-8">
                 <textarea class="form-control" th:field="*{ingredients}" th:required="true"
-                          th:oninvalid="this.setCustomValidity('Recipe ingredients is required')"
+                          th:oninvalid="this.setCustomValidity('Recipe ingredients are required')"
                           th:oninput="this.setCustomValidity('')"></textarea>
         </div>
     </div>
@@ -55,14 +55,14 @@
         <label class="col-sm-2" th:text="'Steps:'"></label>
         <div class="col-sm-8">
                 <textarea class="form-control" th:field="*{steps}" th:required="true"
-                          th:oninvalid="this.setCustomValidity('Recipe steps is required')"
+                          th:oninvalid="this.setCustomValidity('Recipe steps are required')"
                           th:oninput="this.setCustomValidity('')"></textarea>
         </div>
     </div>
-    <div class="row mb-3">
+    <div class="row-0 mb-3">
         <label class="col-sm-2"></label>
         <label class="col-sm-2"></label>
-        <div class="col-sm-4">
+        <div class="col-sm-2">
             <button class="w-100 btn btn-lg btn-dark" type="submit" th:text="'Save'"></button>
         </div>
         
