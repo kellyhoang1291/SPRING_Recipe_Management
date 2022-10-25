@@ -4,7 +4,7 @@
  * Author(s): < Robert Kaczur, Phuong Hoang, Truong Thi Bui>
  * Student Number: < 101014890, 101306676, 101300750>
  * Date: October 23rd 2022
- * Description: This java file is used to return our searches for our app.
+ * Description: This java file is used to get the recipes based on search keyword
  **********************************************************************************/
 package ca.gbc.yumoid.recipe.services;
 
