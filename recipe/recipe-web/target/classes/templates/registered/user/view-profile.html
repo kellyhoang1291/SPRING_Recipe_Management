@@ -10,14 +10,14 @@
 
     <div th:replace="header :: myheader"></div>
     <meta charset="UTF-8">
-    <title>View Profile</title>
+    <title>Yumoid - View Profile</title>
 </head>
 
 <body class="">
 <div class="container ">
     <div class="container px-4 py-5 shadow" id="featured-2">
         <h2 class="pb-2 border-bottom">
-            <div><span th:text="'Menu ' + ${#authentication.name}"></span></div>
+            <div><span th:text="${#authentication.name} + '\'s Profile'"></span></div>
         </h2>
         <div th:if="${message != null}">
             <div class="alert alert-warning" th:text="${message}"></div>
