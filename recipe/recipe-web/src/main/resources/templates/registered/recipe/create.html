@@ -10,7 +10,7 @@
 
     <div th:replace="header :: myheader"></div>
     <meta charset="UTF-8">
-    <title>Create Recipe</title>
+    <title>Yumoid - Create Recipe</title>
 
 </head>
 
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-2" th:text="'Steps:'"></label>
+                <label class="col-sm-2" th:text="'Instruction:'"></label>
                 <div class="col-sm-8">
                         <textarea class="form-control" th:field="*{steps}" th:required="true"
                                   th:oninvalid="this.setCustomValidity('Please input instruction')"

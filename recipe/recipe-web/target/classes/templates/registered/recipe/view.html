@@ -11,7 +11,7 @@
 
     <div th:replace="header :: myheader"></div>
     <meta charset="UTF-8">
-    <title>View Recipe</title>
+    <title>Yumoid - View Recipe</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             <th>Cook Time</th>
             <th>Total Time</th>
             <th>Ingredients</th>
-            <th>Steps</th>
+            <th>Instruction</th>
             <th>Date Added</th>
             <th>Created By</th>
             <th></th>
@@ -42,7 +42,7 @@
             <td th:text="${recipe.ingredients}"></td>
             <td th:text="${recipe.steps}"></td>
             <td th:text="${recipe.dateAdded}"></td>
-            <td th:text="${recipe.createdUser.firstName} + ' ' + ${recipe.createdUser.lastName}"></td>
+            <td th:text="${recipe.createdUser.getFullName()}"></td>
             <td>
                 <form th:unless="${recipe.getLikedByUsers().contains(user)}"
                       th:action="@{'/registered/recipe/update/' + ${recipe.id}}" method="post">
