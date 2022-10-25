@@ -83,10 +83,9 @@ public class RecipeController {
 
     @RequestMapping(value = {"/search"}, method = RequestMethod.POST)
     public String search(HttpServletRequest request, Model model) {
-        String keyword = request.getParameter("name");
+        String keyword = request.getParameter("keyword");
         model.addAttribute("keyword", "Keyword: " + keyword);
         List<Recipe> matchedRecipes = searchService.listAll(keyword);
-        model.addAttribute("nameCount", -1);
         model.addAttribute("count", matchedRecipes.size());
 
         //check if any recipes found
