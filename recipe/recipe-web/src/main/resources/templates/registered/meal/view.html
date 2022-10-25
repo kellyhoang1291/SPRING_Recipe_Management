@@ -15,9 +15,9 @@
             <h2 class="pb-2 border-bottom">
                 <div><span th:text="${#authentication.name} + '\'s Meals'">test</span></div>
             </h2>
-    </div>
-        <table class="table">
-        <thead>
+        </div>
+        <table class="table table-striped">
+        <thead class="table-dark">
         <tr>
             <th>Name</th>
             <th>Date</th>
@@ -30,11 +30,12 @@
             <td th:text="${meal.date}"></td>
             <td th:text="${meal.recipe.name}"></td>
         </tr>
-        </tbody>
-    </table>
+    </tbody>
+</table>
     <form th:action="@{/registered/meal/create}" method="post">
         <button class="btn btn-lg btn-dark" type="submit" th:text="'Plan New Meal'"></button>
     </form>
+    </div>
 </div>
 </body>
 </html>
