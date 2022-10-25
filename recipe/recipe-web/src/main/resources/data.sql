@@ -30,14 +30,17 @@ INSERT INTO RECIPE (id, name, cook_time, prep_time,total_time, ingredients, date
 VALUES (3, 'Test Recipe 2', 0, 0, 0,'No ingredients','2022-10-23', 'No steps to follow');
 
 INSERT INTO RECIPE (id, name, cook_time, prep_time,total_time, ingredients, date_added, steps)
-VALUES (4, 'Test Recipe 3', 0, 0, 0,'Test Recipe 3','2022-10-23', 'No steps to follow');
+VALUES (4, 'Test Recipe 3', 0, 0, 0,'Test Recipe 3','2022-10-24', 'No steps to follow');
+
+INSERT INTO RECIPE (id, name, cook_time, prep_time,total_time, ingredients, date_added, steps)
+VALUES (5, 'Test Recipe 4', 0, 0, 0,'Test Recipe 3','2022-10-24', 'No steps to follow');
 
 
 INSERT INTO users_recipes (user_id, recipe_id)
 VALUES (1, 1);
 
 INSERT INTO users_recipes (user_id, recipe_id)
-VALUES (2, 2);
+VALUES (1, 2);
 
 INSERT INTO users_recipes (user_id, recipe_id)
 VALUES (2, 3);
@@ -45,17 +48,23 @@ VALUES (2, 3);
 INSERT INTO users_recipes (user_id, recipe_id)
 VALUES (2, 4);
 
+INSERT INTO users_recipes (user_id, recipe_id)
+VALUES (2, 5);
+
 INSERT INTO recipe_like (user_id, recipe_id)
 VALUES (1, 1);
 
 INSERT INTO recipe_like (user_id, recipe_id)
-VALUES (2, 2);
+VALUES (1, 2);
 
 INSERT INTO recipe_like (user_id, recipe_id)
 VALUES (2, 3);
 
 INSERT INTO recipe_like (user_id, recipe_id)
 VALUES (2, 4);
+
+INSERT INTO recipe_like (user_id, recipe_id)
+VALUES (2, 5);
 
 -- add meals
 INSERT INTO meal (id, date, name)

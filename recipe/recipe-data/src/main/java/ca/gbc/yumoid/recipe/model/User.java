@@ -163,6 +163,8 @@ public class User {
         this.enabled = enabled;
     }
 
+    public String getFullName(){ return this.firstName + " " + this.lastName; }
+
     @Override
     public String toString() {
         return "User{" +

@@ -25,7 +25,7 @@ public class SearchService {
 
     public List<Recipe> listAll(String keyword){
         if(keyword != null){
-            return searchRepository.search(keyword);
+            return searchRepository.findRecipeByKeyword(keyword);
         }
         return searchRepository.findAll();
     }

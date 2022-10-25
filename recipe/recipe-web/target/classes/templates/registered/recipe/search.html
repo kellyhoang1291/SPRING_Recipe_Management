@@ -15,10 +15,11 @@
             <div><span>Recipe search</span></div>
         </h2>
 
+<h1>Recipe Search</h1>
 <form th:action="@{/registered/recipe/search}" th:object="${recipe}" method="post">
     <div class="row mb-3">
-        <label class=""></label><label class="col-sm-0"></label>
-        <div class="col-8 text-center">
+        <label class="col-sm-2"></label><label class="col-sm-2"></label>
+        <div class="col-5">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="name"/>
         </div>
     </div>

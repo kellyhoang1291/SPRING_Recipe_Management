@@ -24,7 +24,7 @@ public class SecurityController {
         this.userService = userService;
     }
 
-    @RequestMapping({"/register", "register.html"})
+    @RequestMapping({"/register"})
     public String index(Model model) {
         User user = new User();
         model.addAttribute("user", user);
@@ -34,14 +34,14 @@ public class SecurityController {
     @PostMapping(value = "/save")
     public String save(User user, Model model) {
         if (userService.getUserByUsername(user.getUsername()) != null) {
-            model.addAttribute("message", "Invalid User! " + user.getUsername() + " Username Already Taken!");
+            model.addAttribute("message", "Invalid Username! " + user.getUsername() + " is already taken!");
             return "/register";
         }
         userService.save(user);
         return "login";
     }
 
-    @RequestMapping(value = {"", "/", "/login", "/login.html"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"", "/", "/login"}, method = RequestMethod.GET)
     public String showLoginPage() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
@@ -50,7 +50,7 @@ public class SecurityController {
         return "redirect:/registered/";
     }
 
-    @RequestMapping({"/logout", "logout.html"})
+    @RequestMapping({"/logout"})
     public String logout() {
         return "/logout";
     }

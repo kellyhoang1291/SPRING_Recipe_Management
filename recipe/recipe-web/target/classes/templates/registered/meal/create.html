@@ -9,10 +9,10 @@
     <meta charset="UTF-8">
     <title>Plan New Meal</title>
 </head>
-<body>
-    <br/>
-    <form class="container" th:action="@{/registered/meal/save}" th:object="${meal}" method="post">
-    <h1>Plan New Meal</h1>
+<body class="text-center">
+<h1>Plan New Meal</h1>
+<br/>
+<form th:action="@{/registered/meal/save}" th:object="${meal}" method="post">
     <div class="row mb-3">
         <label class="col-sm-2" th:text="'Meal Name:'"></label>
         <div class="col-sm-8">
@@ -49,6 +49,8 @@
     </div>
 </form>
 <br>
-
+<form th:action="@{/registered/meal/view}">
+    <button class="w-100 btn btn-lg btn-dark" type="submit" th:text="'Cancel'"></button>
+</form>
 </body>
 </html>

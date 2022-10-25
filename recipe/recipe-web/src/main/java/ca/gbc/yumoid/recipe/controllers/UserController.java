@@ -30,13 +30,13 @@ public class UserController {
     @RequestMapping({"/view-profile"})
     public String viewProfile(Model model, Authentication authentication) {
         model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
-        model.addAttribute("userRecipes", searchRepository.findRecipeByUsername(authentication.getName()));
+        model.addAttribute("userRecipes", searchRepository.findRecipeByLikedUsername(authentication.getName()));
         return "registered/user/view-profile";
     }
     //View Created & Favorite Recipe
     @RequestMapping({"/view-created-recipes"})
     public String viewUserRecipes(Model model, Authentication authentication) {
-        model.addAttribute("userRecipes", searchRepository.findRecipeByUsername(authentication.getName()));
+        model.addAttribute("userRecipes", searchRepository.findRecipeByLikedUsername(authentication.getName()));
         return "registered/user/view-created-recipes";
     }
 }

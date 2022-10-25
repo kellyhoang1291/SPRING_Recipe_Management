@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.security.core.Authentication;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -64,7 +63,7 @@ public class RecipeController {
     @PostMapping(value = "/save")
     public String saveRecipe(Model model, Recipe recipe, Authentication authentication) {
         recipeService.save(recipe);
-        model.addAttribute("userRecipes", searchRepository.findRecipeByUsername(authentication.getName()));
+        model.addAttribute("userRecipes", searchRepository.findRecipeByLikedUsername(authentication.getName()));
         return "redirect:/registered/recipe/view";
     }
 
@@ -86,7 +85,6 @@ public class RecipeController {
     public String search(HttpServletRequest request, Model model) {
         String keyword = request.getParameter("name");
         model.addAttribute("keyword", "Keyword: " + keyword);
-
         List<Recipe> matchedRecipes = searchService.listAll(keyword);
         model.addAttribute("nameCount", -1);
         model.addAttribute("count", matchedRecipes.size());

@@ -19,10 +19,10 @@ import java.util.List;
 @Repository
 public interface SearchRepository extends JpaRepository<Recipe, Long> {
     @Query("SELECT r FROM Recipe r WHERE LOWER(CONCAT(r.name, r.ingredients, r.steps)) LIKE LOWER(concat('%', concat(:keyword, '%')))")
-    List<Recipe> search(String keyword);
+    List<Recipe> findRecipeByKeyword(String keyword);
 
     @Query("SELECT r FROM Recipe r JOIN r.likedByUsers u WHERE u.username LIKE %?1% ")
-    List<Recipe> findRecipeByUsername(String userName);
+    List<Recipe> findRecipeByLikedUsername(String userName);
 
     @Query("SELECT m FROM Meal m join m.user u WHERE u.username LIKE %?1%")
     List<Meal> findMealByUsername(String userName);
