@@ -4,8 +4,7 @@
  * Author(s): < Robert Kaczur, Phuong Hoang, Truong Thi Bui>
  * Student Number: < 101014890, 101306676, 101300750>
  * Date: October 23rd 2022
- * Description: This java file is used to set the securities making any page that requires
- * a registered user restricted to non-registered users.
+ * Description: This java file is used to authenticate and authorize login users.
  **********************************************************************************/
 package ca.gbc.yumoid.recipe.config;
 

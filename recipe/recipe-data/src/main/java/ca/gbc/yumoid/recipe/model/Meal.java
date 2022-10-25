@@ -4,7 +4,7 @@
  * Author(s): < Robert Kaczur, Phuong Hoang, Truong Thi Bui>
  * Student Number: < 101014890, 101306676, 101300750>
  * Date: October 23rd 2022
- * Description: This java file is used to set the meal entity in our h2 database.
+ * Description: This java file is used to set the meal entity in H2DB.
  **********************************************************************************/
 package ca.gbc.yumoid.recipe.model;
 
