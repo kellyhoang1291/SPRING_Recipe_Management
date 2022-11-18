@@ -49,8 +49,16 @@
             </div>
         </div>
 
-        <form th:action="@{/registered/user/view-created-recipes}">
-            <button class="btn btn-lg btn-dark" type="submit" th:text="'View Favourite Recipes'"></button>
+<!--        <form th:action="@{/registered/user/view-created-recipes}">-->
+<!--            <button class="btn btn-lg btn-dark" type="submit" th:text="'View Favourite Recipes'"></button>-->
+<!--        </form>-->
+
+        <form th:action="@{/registered/user/update-profile}">
+            <button class="btn btn-lg btn-dark" type="submit" th:text="'Update Profile'"></button>
+        </form>
+
+        <form th:action="@{/registered/user/change-password}">
+            <button class="btn btn-lg btn-dark" type="submit" th:text="'Change Password'"></button>
         </form>
     </div>
 </div>

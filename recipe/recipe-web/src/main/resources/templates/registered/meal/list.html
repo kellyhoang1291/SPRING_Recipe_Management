@@ -29,10 +29,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="meal :${userMeals}">
+        <tr th:each="meal :${meals}">
             <td th:text="${meal.name}"></td>
             <td th:text="${meal.date}"></td>
-            <td th:text="${meal.recipe.name}"></td>
+            <td th:text="${meal.recipeMeals.name}"></td>
         </tr>
         </tbody>
     </table>

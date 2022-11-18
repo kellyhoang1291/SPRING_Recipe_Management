@@ -1,16 +1,18 @@
 INSERT INTO role (name) VALUES ('user');
 
 -- add users
-INSERT INTO user (id, first_name, last_name, address, postal_code, username, password, enabled)
+INSERT INTO user (id, first_name, last_name, address, postal_code, username, password, recoveryPIN, enabled)
 VALUES ('1', 'sys', 'admin', 'King St',
         '000 000 0000', 'admin',
         '$2a$10$bN7OWEvi6rTqJEYbZfDOg.FHmG.xPTDxJR1k9LzsR4O6Nt8zuIKwq',
+        '1234',
         '1');
 
-INSERT INTO user (id, first_name, last_name, address, postal_code, username, password, enabled)
+INSERT INTO user (id, first_name, last_name, address, postal_code, username, password, recoveryPIN, enabled)
 VALUES ('2', 'Kelly', 'Hoang', 'Queen St',
         '000 000 0000', 'kelly',
         '$2a$10$bN7OWEvi6rTqJEYbZfDOg.FHmG.xPTDxJR1k9LzsR4O6Nt8zuIKwq',
+        '0000',
         '1');
 
 INSERT INTO users_roles (user_id, role_id)
@@ -51,20 +53,20 @@ VALUES (2, 4);
 INSERT INTO users_recipes (user_id, recipe_id)
 VALUES (2, 5);
 
-INSERT INTO recipe_like (user_id, recipe_id)
-VALUES (1, 1);
-
-INSERT INTO recipe_like (user_id, recipe_id)
-VALUES (1, 2);
-
-INSERT INTO recipe_like (user_id, recipe_id)
-VALUES (2, 3);
-
-INSERT INTO recipe_like (user_id, recipe_id)
-VALUES (2, 4);
-
-INSERT INTO recipe_like (user_id, recipe_id)
-VALUES (2, 5);
+-- INSERT INTO recipe_like (user_id, recipe_id)
+-- VALUES (1, 1);
+--
+-- INSERT INTO recipe_like (user_id, recipe_id)
+-- VALUES (1, 2);
+--
+-- INSERT INTO recipe_like (user_id, recipe_id)
+-- VALUES (2, 3);
+--
+-- INSERT INTO recipe_like (user_id, recipe_id)
+-- VALUES (2, 4);
+--
+-- INSERT INTO recipe_like (user_id, recipe_id)
+-- VALUES (2, 5);
 
 -- add meals
 INSERT INTO meal (id, date, name)

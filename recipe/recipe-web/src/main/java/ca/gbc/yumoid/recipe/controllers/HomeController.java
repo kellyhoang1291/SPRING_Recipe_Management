@@ -20,4 +20,6 @@ public class HomeController {
         return "registered/index";
     }
 
+
+
 }

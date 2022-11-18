@@ -15,7 +15,7 @@ import ca.gbc.yumoid.recipe.model.Recipe;
 import ca.gbc.yumoid.recipe.repositories.SearchRepository;
 import ca.gbc.yumoid.recipe.services.MealService;
 import ca.gbc.yumoid.recipe.services.SearchService;
-import org.springframework.security.core.Authentication;
+import ca.gbc.yumoid.recipe.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,17 +30,22 @@ public class MealController {
     final private MealService mealService;
     final private SearchRepository searchRepository;
 
-    public MealController(SearchService searchService, MealService mealService, SearchRepository searchRepository) {
+    final private UserService userService;
+
+    public MealController(SearchService searchService, MealService mealService, SearchRepository searchRepository, UserService userService) {
         this.searchService = searchService;
         this.mealService = mealService;
         this.searchRepository = searchRepository;
+        this.userService = userService;
     }
 
     //Load meals
-    @RequestMapping({"/view"})
-    public String plan(Model model, Authentication authentication) {
-        model.addAttribute("userMeals", searchRepository.findMealByUsername(authentication.getName()));
-        return "registered/meal/view";
+    @RequestMapping({"/list"})
+    public String plan(Model model) {
+        List<Meal> meals = searchService.listMyMeals(userService.getCurrentUser());
+        model.addAttribute("meals", meals);
+
+        return "registered/meal/list";
     }
     //Create meals
     @RequestMapping({"/create"})
@@ -53,9 +58,9 @@ public class MealController {
     }
 
     @PostMapping(value = "/save")
-    public String saveMeal(Meal meal, Authentication authentication, Model model) {
+    public String saveMeal(Meal meal, Model model) {
         mealService.save(meal);
-        model.addAttribute("userMeals", searchRepository.findMealByUsername(authentication.getName()));
-        return "registered/meal/view";
+        model.addAttribute("meals", searchService.listMyMeals(userService.getCurrentUser()));
+        return "registered/meal/list";
     }
 }

@@ -35,9 +35,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/recipe/view' ? 'active':''}"
-                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/recipe/view' ? 'page':''}"
-                           th:href="@{/registered/recipe/view}" th:text="'View Recipes'"></a>
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/recipe/list' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/recipe/list' ? 'page':''}"
+                           th:href="@{/registered/recipe/list}" th:text="'View Recipes'"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
@@ -53,9 +53,15 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/meal/view' ? 'active':''}"
-                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/meal/view' ? 'page':''}"
-                           th:href="@{/registered/meal/view}" th:text="'Plan Meal'"></a>
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/meal/list' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/meal/list' ? 'page':''}"
+                           th:href="@{/registered/meal/list}" th:text="'Plan Meal'"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/event/list' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/eveny/list' ? 'page':''}"
+                           th:href="@{/registered/event/list}" th:text="'View Events'"></a>
                     </li>
                     <li class="nav-item">
                         <form th:action="@{/doLogout}" method="post">

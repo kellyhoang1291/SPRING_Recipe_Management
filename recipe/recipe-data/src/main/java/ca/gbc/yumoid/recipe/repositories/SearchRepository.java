@@ -8,8 +8,10 @@
  **********************************************************************************/
 package ca.gbc.yumoid.recipe.repositories;
 
+import ca.gbc.yumoid.recipe.model.Event;
 import ca.gbc.yumoid.recipe.model.Meal;
 import ca.gbc.yumoid.recipe.model.Recipe;
+import ca.gbc.yumoid.recipe.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,11 +23,17 @@ public interface SearchRepository extends JpaRepository<Recipe, Long> {
     @Query("SELECT r FROM Recipe r WHERE LOWER(CONCAT(r.name, r.ingredients, r.steps)) LIKE LOWER(concat('%', concat(:keyword, '%')))")
     List<Recipe> findRecipeByKeyword(String keyword);
 
-    @Query("SELECT r FROM Recipe r JOIN r.likedByUsers u WHERE u.username LIKE %?1% ")
+    @Query("SELECT r FROM Recipe r WHERE r.userRecipe = ?1")
+    List<Recipe> findRecipeByUsername(User user);
+
+    @Query("SELECT r FROM Recipe r JOIN r.likedByUsers u WHERE u.username LIKE %?1%")
     List<Recipe> findRecipeByLikedUsername(String userName);
 
-    @Query("SELECT m FROM Meal m join m.user u WHERE u.username LIKE %?1%")
-    List<Meal> findMealByUsername(String userName);
+    @Query("SELECT m FROM Meal m WHERE m.userMeal = ?1")
+    List<Meal> findMealByUsername(User user);
+
+    @Query("SELECT e FROM Event e WHERE e.userEvent = ?1")
+    List<Event> findEventByUsername(User user);
 
 }
 

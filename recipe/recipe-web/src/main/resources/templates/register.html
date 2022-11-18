@@ -39,7 +39,7 @@
                                     x="148.163" y="122.205">Y</text>
                         </svg></span></div>
                             <br>
-                                <form th:action="@{/save}" th:object="${user}" method="post">
+                                <form th:action="@{/register}" th:object="${user}" method="post">
                                     <div class="mb-3">
                                             <input placeholder="First Name" type="text" class="form-control" th:field="*{firstName}" th:required="true"
                                                    th:oninvalid="this.setCustomValidity('First name required')"
@@ -49,6 +49,7 @@
                                             <input placeholder="Last Name" type="text" class="form-control" th:field="*{lastName}" th:required="true"
                                                    th:oninvalid="this.setCustomValidity('Last name required')"
                                                    th:oninput="this.setCustomValidity('')"/>
+
                                     </div>
                                     <div class="mb-3">
                                             <input placeholder="Address"  type="text" class="form-control" th:field="*{address}"/>
@@ -66,6 +67,13 @@
                                                    th:oninvalid="this.setCustomValidity('Please enter password')"
                                                    th:oninput="this.setCustomValidity('')"/>
                                     </div>
+
+                                    <div class="mb-3">
+                                        <input placeholder="Recovery PIN" type="password" class="form-control" th:field="*{recoveryPIN}" th:required="true" autocomplete="false"
+                                               th:oninvalid="this.setCustomValidity('Pleaes enter recovery PIN')"
+                                               th:oninput="this.setCustomValidity('')"/>
+                                    </div>
+
                                     <div class="mb-3">
                                         <label class=""></label>
                                         <div class="">

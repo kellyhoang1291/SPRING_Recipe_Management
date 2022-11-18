@@ -31,7 +31,7 @@ public class MealService {
 
     public void save(Meal meal){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        meal.setUser(userRepository.getUserByUsername(authentication.getName()));
+        meal.setUserMeal(userRepository.getUserByUsername(authentication.getName()));
         mealRepository.save(meal);
     }
 

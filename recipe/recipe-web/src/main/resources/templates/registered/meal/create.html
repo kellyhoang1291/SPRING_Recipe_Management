@@ -37,7 +37,7 @@
     <div class="row mb-3">
         <label class="col-sm-2" th:text="'Meal Recipe:'"></label>
         <div class="col-sm-8">
-            <select class="form-select" th:field="*{recipe}" th:required="true"
+            <select class="form-select" th:field="*{recipeMeals}" th:required="true"
                     th:oninvalid="this.setCustomValidity('Please select a recipe')"
                     th:oninput="this.setCustomValidity('')">
                 <option th:each="recipe :${recipes}" th:value="${recipe.id}" th:text="${recipe.name}"></option>

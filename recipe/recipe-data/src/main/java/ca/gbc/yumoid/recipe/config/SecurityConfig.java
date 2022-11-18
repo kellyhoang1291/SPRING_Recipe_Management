@@ -52,15 +52,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/**/*.js", "/**/*.css").permitAll()
                 .antMatchers("/registered/**").hasAnyAuthority("user")
-                .antMatchers("/h2-console/**", "/", "/register", "/login", "/save", "/static/**","/css/**", "/js/**", "/images/**","/templates/js/**").permitAll().anyRequest().authenticated().and().formLogin()
+                .antMatchers("/h2-console/**", "/", "/register", "/login", "/reset", "/reset-success", "/save", "/static/**","/css/**", "/js/**", "/images/**","/templates/js/**").permitAll().anyRequest().authenticated().and().formLogin()
                 .loginPage("/login").usernameParameter("username").passwordParameter("password")
                 .permitAll()
                 .defaultSuccessUrl("/registered/index", true)
                 .and().logout().permitAll()
                 .logoutUrl("/doLogout")
                 .logoutSuccessUrl("/logout").and().exceptionHandling().accessDeniedPage("/403");
-
-
 
         http.csrf().disable();
         http.headers().frameOptions().disable();

@@ -11,6 +11,7 @@
 package ca.gbc.yumoid.recipe.controllers;
 
 import ca.gbc.yumoid.recipe.model.Recipe;
+import ca.gbc.yumoid.recipe.model.User;
 import ca.gbc.yumoid.recipe.repositories.SearchRepository;
 import ca.gbc.yumoid.recipe.services.RecipeService;
 import ca.gbc.yumoid.recipe.services.SearchService;
@@ -18,13 +19,11 @@ import ca.gbc.yumoid.recipe.services.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 
 @RequestMapping("/registered/recipe")
 @Controller
@@ -44,12 +43,63 @@ public class RecipeController {
 
 
     //RECIPE ===================================================================================================
-    //Load recipe
-    @RequestMapping({"/view"})
+    //Load recipes
+    @RequestMapping({"/list"})
     public String viewRecipe(Model model, Authentication authentication) {
         List<Recipe> listRecipes = searchService.listAll("");
         model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
         model.addAttribute("recipes", listRecipes);
+        return "registered/recipe/list";
+    }
+
+    // filter list recipe
+    @PostMapping({"/list"})
+    public String viewRecipe(Model model, Authentication authentication, HttpServletRequest request) {
+        User user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
+        List<Recipe> listRecipes = null;
+        String message = "";
+
+        String type = request.getParameter("type");
+
+        if (Objects.equals(type, "all")) {
+            listRecipes = searchService.listAll("");
+            if (listRecipes.size() == 0)
+                message = "Please start creating some recipes...";
+        }
+        else if (Objects.equals(type, "myRecipe")){
+            listRecipes = searchService.listMyRecipe(user);
+            if (listRecipes.size() == 0)
+                message = "Please start creating some recipes...";
+        }
+
+        else if (Objects.equals(type, "favoriteRecipe")){
+            listRecipes = searchRepository.findRecipeByLikedUsername(authentication.getName());
+            if (listRecipes.size() == 0)
+                message = "You have no favorite recipes";
+        }
+
+        model.addAttribute("count", listRecipes.size());
+
+        //check if any recipes found
+        if (listRecipes.size() > 0) {
+            model.addAttribute("recipes", listRecipes);
+        } else {
+            model.addAttribute("message", message);
+        }
+
+        model.addAttribute("type", type);
+        return "registered/recipe/list";
+    }
+
+    //View recipe
+
+
+    @GetMapping({"/view"})
+    public String view(@RequestParam("id") Long id, Model model) {
+        Recipe recipe = recipeService.getRecipeById(id);
+        model.addAttribute("recipe", recipe);
         return "registered/recipe/view";
     }
 
@@ -65,14 +115,14 @@ public class RecipeController {
     public String saveRecipe(Model model, Recipe recipe, Authentication authentication) {
         recipeService.save(recipe);
         model.addAttribute("userRecipes", searchRepository.findRecipeByLikedUsername(authentication.getName()));
-        return "redirect:/registered/recipe/view";
+        return "redirect:/registered/recipe/list";
     }
 
     //Like Recipe
     @PostMapping( "/update/{id}")
     public String updateRecipe(@PathVariable Long id) {
         recipeService.markedAsFavoriteByID(id);
-        return "redirect:/registered/recipe/view";
+        return "redirect:/registered/recipe/list";
     }
 
     //Search Recipe

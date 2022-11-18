@@ -34,8 +34,12 @@ public class Recipe {
     private Set<User> likedByUsers = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "users_recipes", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private User createdUser;
+    @JoinTable(name = "users_recipes", joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private User userRecipe;
+
+    @ManyToMany(mappedBy = "ingredientRecipe")
+    private Set<Ingredient> recipeIngredients = new HashSet<>();
 
 
     public Recipe() {}
@@ -51,7 +55,7 @@ public class Recipe {
         this.dateAdded = dateAdded;
     }
 
-    public Recipe(Long id, String name, int prepTime, int cookTime, int totalTime, String ingredients, String steps, LocalDate dateAdded, Set<User> likedByUsers, User createdUser) {
+    public Recipe(Long id, String name, int prepTime, int cookTime, int totalTime, String ingredients, String steps, LocalDate dateAdded, Set<User> likedByUsers, User userRecipe) {
         this.id = id;
         this.name = name;
         this.prepTime = prepTime;
@@ -61,7 +65,7 @@ public class Recipe {
         this.steps = steps;
         this.dateAdded = dateAdded;
         this.likedByUsers = likedByUsers;
-        this.createdUser = createdUser;
+        this.userRecipe = userRecipe;
     }
 
     public Long getId() {
@@ -128,12 +132,12 @@ public class Recipe {
         this.likedByUsers = likedByUsers;
     }
 
-    public User getCreatedUser() {
-        return createdUser;
+    public User getUserRecipe() {
+        return userRecipe;
     }
 
-    public void setCreatedUser(User createdUser) {
-        this.createdUser = createdUser;
+    public void setUserRecipe(User createdUser) {
+        this.userRecipe = createdUser;
     }
 
     public String getSteps() {
@@ -156,7 +160,7 @@ public class Recipe {
                 ", steps='" + steps + '\'' +
                 ", dateAdded=" + dateAdded +
                 ", likedByUsers=" + likedByUsers +
-                ", createdUser=" + createdUser +
+                ", createdUser=" + userRecipe +
                 '}';
     }
 

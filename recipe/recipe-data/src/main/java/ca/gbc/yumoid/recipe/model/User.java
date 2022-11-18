@@ -8,6 +8,10 @@
  **********************************************************************************/
 package ca.gbc.yumoid.recipe.model;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import javax.validation.constraints.*;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -24,25 +28,31 @@ public class User {
     @Column(unique = true)
     private String username;
     private String password;
+    @NotNull
+    private String recoveryPIN;
     private boolean enabled;
 
     @ManyToMany(mappedBy = "likedByUsers")
     private Set<Recipe> likedRecipes = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "createdUser")
+    @OneToMany(mappedBy = "userRecipe")
     private Set<Recipe> recipes;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "userMeal")
     private Set<Meal> meals;
+
+    @OneToMany(mappedBy = "userEvent")
+    private Set<Event> events;
 
     public User() {
     }
 
-    public User(Long id, String firstName, String lastName, String address, String postalCode, String username, String password) {
+    public User(Long id, String firstName, String lastName, String address, String postalCode, String username, String password,  String recoveryPIN) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,9 +60,12 @@ public class User {
         this.postalCode = postalCode;
         this.username = username;
         this.password = password;
+        this.recoveryPIN = recoveryPIN;
     }
 
-    public User(Long id, String firstName, String lastName, String address, String postalCode, String username, String password, boolean enabled, Set<Recipe> likedRecipes, Set<Role> roles, Set<Recipe> recipes, Set<Meal> meals) {
+    public User(Long id, String firstName, String lastName, String address, String postalCode, String username,
+                String password, String recoveryPIN, boolean enabled, Set<Recipe> likedRecipes, Set<Role> roles,
+                Set<Recipe> recipes, Set<Meal> meals, Set<Event> events) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -60,11 +73,13 @@ public class User {
         this.postalCode = postalCode;
         this.username = username;
         this.password = password;
+        this.recoveryPIN = recoveryPIN;
         this.enabled = enabled;
         this.likedRecipes = likedRecipes;
         this.roles = roles;
         this.recipes = recipes;
         this.meals = meals;
+        this.events = events;
     }
 
     public Long getId() {
@@ -164,6 +179,23 @@ public class User {
     }
 
     public String getFullName(){ return this.firstName + " " + this.lastName; }
+
+
+    public String getRecoveryPIN() {
+        return recoveryPIN;
+    }
+
+    public void setRecoveryPIN(String recoveryPIN) {
+        this.recoveryPIN = recoveryPIN;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
 
     @Override
     public String toString() {
