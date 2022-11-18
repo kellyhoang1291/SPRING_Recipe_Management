@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <div th:replace="header :: myheader"></div>
+    <meta charset="UTF-8">
+    <title>Yumoid - Create Recipe</title>
+
+</head>
+
+<body class="">
+<div class="container shadow">
+    <div class="container px-4 py-5" id="featured-2">
+        <h2 class="pb-2 border-bottom">
+            <div><span> Create New Recipe</span></div>
+        </h2>
+        <form th:action="@{/registered/recipe/save}" th:object="${recipe}" method="post">
+            <div class="row mb-3">
+                <label class="col-sm-2" th:text="'Recipe Name:'"></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" th:field="*{name}" th:required="true"
+                           th:oninvalid="this.setCustomValidity('Please enter recipe name')"
+                           th:oninput="this.setCustomValidity('')" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2" th:text="'Preparation Time:'"></label>
+                <div class="col-sm-8">
+                    <input type="number" step="1" class="form-control" th:field="*{prepTime}" th:required="true"
+                           th:oninvalid="this.setCustomValidity('Please enter preparation time')"
+                           th:oninput="this.setCustomValidity('')" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2" th:text="'Cook Time (In minutes):'"></label>
+                <div class="col-sm-8">
+                    <input type="number" step="1" class="form-control" th:field="*{cookTime}" th:required="true"
+                           th:oninvalid="this.setCustomValidity('Please enter cooking time')"
+                           th:oninput="this.setCustomValidity('')" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2" th:text="'Ingredients:'"></label>
+                <div class="col-sm-8">
+                        <textarea class="form-control" th:field="*{ingredients}" th:required="true"
+                                  th:oninvalid="this.setCustomValidity('Please input ingredients')"
+                                  th:oninput="this.setCustomValidity('')"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2" th:text="'Instruction:'"></label>
+                <div class="col-sm-8">
+                        <textarea class="form-control" th:field="*{steps}" th:required="true"
+                                  th:oninvalid="this.setCustomValidity('Please input instruction')"
+                                  th:oninput="this.setCustomValidity('')"></textarea>
+                </div>
+            </div>
+            <div class="row-0 mb-3">
+                <label class="col-sm-2"></label>
+                <label class="col-sm-2"></label>
+                <div class="col-sm-2">
+                    <button class="w-100 btn btn-lg btn-dark" type="submit" th:text="'Save'"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+</div>
+</body>
+
+</html>
