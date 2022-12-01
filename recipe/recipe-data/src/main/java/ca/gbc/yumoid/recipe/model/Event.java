@@ -21,8 +21,8 @@ public class Event {
     private String eventDesc;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id"))
+    @JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     private User userEvent;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -53,6 +53,37 @@ VALUES (2, 4);
 INSERT INTO users_recipes (user_id, recipe_id)
 VALUES (2, 5);
 
+-- Add ingredients
+INSERT INTO ingredient(id, ingredient_name, quantity, unit)
+VALUES (1, 'Rice', 3, 'cups');
+
+INSERT INTO ingredient(id, ingredient_name, quantity, unit)
+VALUES (2, 'Frozen Shrimp', 5, 'lbs');
+
+INSERT INTO ingredient(id, ingredient_name, quantity, unit)
+VALUES (3, 'Egg', 5, 'whole egg');
+
+INSERT INTO ingredient(id, ingredient_name, quantity, unit)
+VALUES (4, 'Soy sauce', 5, 'tea spoons');
+
+INSERT INTO ingredient(id, ingredient_name, quantity, unit)
+VALUES (5, 'Chick powder', 2, 'table spoons');
+
+INSERT INTO ingredient(id, ingredient_name, quantity, unit)
+VALUES (6, 'MSG', 1, 'tea spoon');
+
+INSERT INTO recipes_ingredients(recipe_id, ingredient_id)
+VALUES (1, 1);
+INSERT INTO recipes_ingredients(recipe_id, ingredient_id)
+VALUES (1, 2);
+INSERT INTO recipes_ingredients(recipe_id, ingredient_id)
+VALUES (1, 3);
+INSERT INTO recipes_ingredients(recipe_id, ingredient_id)
+VALUES (1, 4);
+INSERT INTO recipes_ingredients(recipe_id, ingredient_id)
+VALUES (1, 5);
+INSERT INTO recipes_ingredients(recipe_id, ingredient_id)
+VALUES (1, 6);
 -- INSERT INTO recipe_like (user_id, recipe_id)
 -- VALUES (1, 1);
 --
@@ -95,3 +126,21 @@ VALUES (2, 1);
 
 INSERT INTO users_meals (meal_id, user_id)
 VALUES (3, 1);
+
+-- Add event
+INSERT INTO event(id, event_date, event_desc, event_name)
+VALUES (1, '2022-12-03', 'Saturday weekly gathering', 'Family Gathering');
+
+INSERT INTO event_recipe(recipe_id, event_id)
+VALUES (1, 1);
+
+INSERT INTO event(id, event_date, event_desc, event_name)
+VALUES (2, '2022-12-01', 'My birthday', 'Kelly Birthday');
+
+INSERT INTO event_recipe(recipe_id, event_id)
+VALUES (1, 2);
+
+INSERT INTO user_event(user_id, event_id)
+VALUES (1, 1);
+INSERT INTO user_event(user_id, event_id)
+VALUES (1,2);
