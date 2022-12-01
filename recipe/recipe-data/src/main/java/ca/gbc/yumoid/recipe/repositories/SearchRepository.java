@@ -8,19 +8,17 @@
  **********************************************************************************/
 package ca.gbc.yumoid.recipe.repositories;
 
-import ca.gbc.yumoid.recipe.model.Event;
-import ca.gbc.yumoid.recipe.model.Meal;
-import ca.gbc.yumoid.recipe.model.Recipe;
-import ca.gbc.yumoid.recipe.model.User;
+import ca.gbc.yumoid.recipe.model.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface SearchRepository extends JpaRepository<Recipe, Long> {
-    @Query("SELECT r FROM Recipe r WHERE LOWER(CONCAT(r.name, r.ingredients, r.steps)) LIKE LOWER(concat('%', concat(:keyword, '%')))")
+    @Query("SELECT r FROM Recipe r WHERE LOWER(CONCAT(r.name, r.steps)) LIKE LOWER(concat('%', concat(:keyword, '%')))")
     List<Recipe> findRecipeByKeyword(String keyword);
 
     @Query("SELECT r FROM Recipe r WHERE r.userRecipe = ?1")
@@ -34,6 +32,9 @@ public interface SearchRepository extends JpaRepository<Recipe, Long> {
 
     @Query("SELECT e FROM Event e WHERE e.userEvent = ?1")
     List<Event> findEventByUsername(User user);
+
+    @Query("SELECT i FROM Ingredient i JOIN i.ingredientRecipes r WHERE r.id = :id")
+    Set<Ingredient> getIngredientsByRecipe(Long id);
 
 }
 

@@ -4,7 +4,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Event {
@@ -22,6 +24,11 @@ public class Event {
     @JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id"))
     private User userEvent;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = "event_recipe", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
+    private Recipe eventRecipe;
+
 
     public Event() {
     }
@@ -81,6 +88,13 @@ public class Event {
         this.userEvent = userEvent;
     }
 
+    public Recipe getEventRecipe() {
+        return eventRecipe;
+    }
+
+    public void setEventRecipe(Recipe eventRecipe) {
+        this.eventRecipe = eventRecipe;
+    }
 
     @Override
     public String toString() {

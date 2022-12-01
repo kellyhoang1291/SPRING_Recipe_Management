@@ -35,6 +35,7 @@
             <th>Event Name</th>
             <th>Event Description</th>
             <th>Event Date</th>
+            <th>Recipe</th>
             <th>Created By</th>
         </tr>
         </thead>
@@ -45,6 +46,7 @@
             <td th:text="${event.eventName}" />
             <td th:text="${event.eventDesc}" />
             <td th:text="${event.eventDate}" />
+            <td th:text="${event.eventRecipe.name}" />
             <td th:text="${event.userEvent.getFullName()}" />
 
             <td>

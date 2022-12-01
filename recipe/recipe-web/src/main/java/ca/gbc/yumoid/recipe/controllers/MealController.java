@@ -29,7 +29,6 @@ public class MealController {
     final private SearchService searchService;
     final private MealService mealService;
     final private SearchRepository searchRepository;
-
     final private UserService userService;
 
     public MealController(SearchService searchService, MealService mealService, SearchRepository searchRepository, UserService userService) {

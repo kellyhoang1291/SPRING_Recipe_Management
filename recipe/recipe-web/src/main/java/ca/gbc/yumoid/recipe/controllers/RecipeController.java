@@ -10,6 +10,7 @@
 
 package ca.gbc.yumoid.recipe.controllers;
 
+import ca.gbc.yumoid.recipe.model.Ingredient;
 import ca.gbc.yumoid.recipe.model.Recipe;
 import ca.gbc.yumoid.recipe.model.User;
 import ca.gbc.yumoid.recipe.repositories.SearchRepository;
@@ -22,8 +23,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @RequestMapping("/registered/recipe")
 @Controller
@@ -96,33 +100,56 @@ public class RecipeController {
     //View recipe
 
 
-    @GetMapping({"/view"})
-    public String view(@RequestParam("id") Long id, Model model) {
+    @RequestMapping({"/view"})
+    public String view(@RequestParam Long id, Model model) {
         Recipe recipe = recipeService.getRecipeById(id);
+        Set<Ingredient> ingredients = searchService.ingredientSet(id);
+        Ingredient ingredient = new Ingredient();
         model.addAttribute("recipe", recipe);
+        model.addAttribute("ingredients", ingredients);
+        model.addAttribute("ingredient", ingredient);
         return "registered/recipe/view";
     }
 
     //Create recipe
     @RequestMapping({"/create"})
-    public String create(Model model) {
-        Recipe recipe = new Recipe();
-        model.addAttribute("recipe", recipe);
+    public String create(Model model, HttpSession session) {
+        Set<Ingredient> recipeIngredients ;
+        if (session.getAttribute("recipeIngredients") != null)
+            recipeIngredients = (Set<Ingredient>) session.getAttribute("recipeIngredients");
+        else
+            recipeIngredients = new HashSet<>();
+
+        model.addAttribute("recipe", new Recipe());
+        model.addAttribute("ingredient", new Ingredient());
+        model.addAttribute("ingredients", recipeIngredients);
         return "registered/recipe/create";
     }
 
     @PostMapping(value = "/save")
-    public String saveRecipe(Model model, Recipe recipe, Authentication authentication) {
-        recipeService.save(recipe);
-        model.addAttribute("userRecipes", searchRepository.findRecipeByLikedUsername(authentication.getName()));
-        return "redirect:/registered/recipe/list";
+    public String saveRecipe(Recipe recipe, HttpSession session) {
+        Set<Ingredient> recipeIngredients = (Set<Ingredient>) session.getAttribute("recipeIngredients");
+        recipe.setRecipeIngredients(recipeIngredients);
+
+        session.setAttribute("recipe",recipe);
+        return "redirect:/registered/ingredients/save";
     }
 
     //Like Recipe
-    @PostMapping( "/update/{id}")
-    public String updateRecipe(@PathVariable Long id) {
+    @PostMapping( "/favorite/{id}")
+    public String favoriteRecipe(@PathVariable Long id) {
         recipeService.markedAsFavoriteByID(id);
         return "redirect:/registered/recipe/list";
+    }
+
+    @RequestMapping("/update/{id}")
+    public String updateRecipe(@PathVariable("id") Long id, Model model){
+        Set<Ingredient> recipeIngredients = searchService.ingredientSet(id);
+        Recipe recipe = recipeService.getRecipeById(id);
+        model.addAttribute("ingredient", new Ingredient());
+        model.addAttribute("ingredients", recipeIngredients);
+        model.addAttribute("recipe", recipe);
+        return "/registered/recipe/update";
     }
 
     //Search Recipe

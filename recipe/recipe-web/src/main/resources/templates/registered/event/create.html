@@ -26,7 +26,7 @@
 
     <p class="h4 mb-4">Save Event</p>
 
-    <form action="#" th:action="@{/registered/event/update/save}"
+    <form action="#" th:action="@{/registered/event/save}"
           th:object="${event}" method="POST">
 
         <!-- Add hidden form field to handle update -->
@@ -38,8 +38,8 @@
                class="form-control mb-4 col-4" placeholder="Event Name">
 
         <textarea th:field="*{eventDesc}" th:required="true"
-               th:oninvalid="this.setCustomValidity('Please enter event description')"
-               th:oninput="this.setCustomValidity('')"
+                  th:oninvalid="this.setCustomValidity('Please enter event description')"
+                  th:oninput="this.setCustomValidity('')"
                   class="form-control mb-4 col-4" placeholder="Event Details"></textarea>
 
         <input type="date" th:field="*{eventDate}" th:required="true"
@@ -48,13 +48,10 @@
                class="form-control mb-4 col-4">
 
         <div class="mb-4 col-4">
-            <select class="form-select" th:id="recipeId" th:name="recipeId" th:required="true"
+            <select class="form-select" th:field="*{eventRecipe}" th:required="true"
                     th:oninvalid="this.setCustomValidity('Please select a recipe')"
                     th:oninput="this.setCustomValidity('')">
-                <option th:each="recipe :${recipes}"
-                        th:value="${recipe.id}"
-                        th:text="${recipe.name}"
-                        th:selected="${recipe.id == event.eventRecipe.id}"></option>
+                <option th:each="recipe :${recipes}" th:value="${recipe.id}" th:text="${recipe.name}" th:selected ></option>
             </select>
         </div>
 

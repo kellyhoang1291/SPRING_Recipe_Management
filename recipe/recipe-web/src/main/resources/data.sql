@@ -22,20 +22,20 @@ INSERT INTO users_roles (user_id, role_id)
 VALUES (2, 1);
 
 -- add recipes
-INSERT INTO RECIPE (id, name, cook_time, prep_time,total_time, ingredients, date_added, steps)
-VALUES (1, 'Fried Rice', 5, 10, 15, 'rice, egg, oil, sausage, soy sauce', '2022-10-23', 'Mix ingredients into rice, Fry it!');
+INSERT INTO RECIPE (id, name, cook_time, prep_time,total_time, date_added, steps)
+VALUES (1, 'Fried Rice', 5, 10, 15,'2022-10-23', 'Mix ingredients into rice, Fry it!');
 
-INSERT INTO RECIPE (id, name, cook_time, prep_time,total_time, ingredients, date_added, steps)
-VALUES (2, 'Test Recipe', 0, 0, 0,'No ingredients','2022-10-23', 'No steps to follow');
+INSERT INTO RECIPE (id, name, cook_time, prep_time,total_time, date_added, steps)
+VALUES (2, 'Test Recipe', 0, 0, 0,'2022-10-23', 'No steps to follow');
 
-INSERT INTO RECIPE (id, name, cook_time, prep_time,total_time, ingredients, date_added, steps)
-VALUES (3, 'Test Recipe 2', 0, 0, 0,'No ingredients','2022-10-23', 'No steps to follow');
+INSERT INTO RECIPE (id, name, cook_time, prep_time,total_time, date_added, steps)
+VALUES (3, 'Test Recipe 2', 0, 0, 0,'2022-10-23', 'No steps to follow');
 
-INSERT INTO RECIPE (id, name, cook_time, prep_time,total_time, ingredients, date_added, steps)
-VALUES (4, 'Test Recipe 3', 0, 0, 0,'Test Recipe 3','2022-10-24', 'No steps to follow');
+INSERT INTO RECIPE (id, name, cook_time, prep_time,total_time, date_added, steps)
+VALUES (4, 'Test Recipe 3', 0, 0, 0,'2022-10-24', 'No steps to follow');
 
-INSERT INTO RECIPE (id, name, cook_time, prep_time,total_time, ingredients, date_added, steps)
-VALUES (5, 'Test Recipe 4', 0, 0, 0,'Test Recipe 3','2022-10-24', 'No steps to follow');
+INSERT INTO RECIPE (id, name, cook_time, prep_time,total_time,  date_added, steps)
+VALUES (5, 'Test Recipe 4', 0, 0, 0,'2022-10-24', 'No steps to follow');
 
 
 INSERT INTO users_recipes (user_id, recipe_id)

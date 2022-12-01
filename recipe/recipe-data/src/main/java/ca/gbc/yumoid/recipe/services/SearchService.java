@@ -8,14 +8,12 @@
  **********************************************************************************/
 package ca.gbc.yumoid.recipe.services;
 
-import ca.gbc.yumoid.recipe.model.Event;
-import ca.gbc.yumoid.recipe.model.Meal;
-import ca.gbc.yumoid.recipe.model.Recipe;
-import ca.gbc.yumoid.recipe.model.User;
+import ca.gbc.yumoid.recipe.model.*;
 import ca.gbc.yumoid.recipe.repositories.SearchRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class SearchService {
@@ -44,5 +42,7 @@ public class SearchService {
     public List<Meal> listMyMeals(User user){
         return searchRepository.findMealByUsername(user);
     }
+
+    public Set<Ingredient> ingredientSet(Long recipeId) { return searchRepository.getIngredientsByRecipe(recipeId); }
 
 }

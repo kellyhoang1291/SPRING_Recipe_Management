@@ -15,6 +15,8 @@ public class ShoppingList {
     @JoinTable(name = "user_shopping_list", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
     private User user;
 
-    @ManyToMany(mappedBy = "ingredientShoppingList")
-    private Set<Ingredient> shopIngredients = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "shopping_list_ingredients",
+            joinColumns = @JoinColumn(name = "shopping_list_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private Set<Ingredient> shoppingListIngredients;
 }

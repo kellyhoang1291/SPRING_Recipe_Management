@@ -13,36 +13,30 @@ public class Ingredient {
 
     private String ingredientName;
 
-    private String quantity;
+    private Long quantity;
 
-    @ManyToMany
-    @JoinTable(name = "ingredient_recipe",
-            joinColumns = @JoinColumn(name = "ingredient_id"),
-            inverseJoinColumns = @JoinColumn(name = "recipe_id"))
-    private Set<Recipe> ingredientRecipe = new HashSet<>();
+    private String unit;
 
-    @ManyToMany
-    @JoinTable(name = "ingredient_shopping",
-            joinColumns = @JoinColumn(name = "ingredient_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id"))
-    private Set<Recipe> ingredientShoppingList = new HashSet<>();
+    @ManyToMany(mappedBy = "recipeIngredients")
+    private Set<Recipe> ingredientRecipes = new HashSet<>();
+
+    @ManyToMany(mappedBy ="shoppingListIngredients")
+    private Set<ShoppingList> ingredientShoppingList = new HashSet<>();
 
     public Ingredient() {
     }
 
-    public Ingredient(Long id, String ingredientName, String quantity, Set<Recipe> ingredientRecipe, Set<Recipe> ingredientShoppingList) {
+    public Ingredient(Long id, String ingredientName, Long quantity, String unit) {
         this.id = id;
         this.ingredientName = ingredientName;
         this.quantity = quantity;
-        this.ingredientRecipe = ingredientRecipe;
-        this.ingredientShoppingList = ingredientShoppingList;
+        this.unit = unit;
     }
 
-    public Ingredient(String ingredientName, String quantity, Set<Recipe> ingredientRecipe, Set<Recipe> ingredientShoppingList) {
+    public Ingredient(String ingredientName, Long quantity, String unit) {
         this.ingredientName = ingredientName;
         this.quantity = quantity;
-        this.ingredientRecipe = ingredientRecipe;
-        this.ingredientShoppingList = ingredientShoppingList;
+        this.unit = unit;
     }
 
     public Long getId() {
@@ -61,38 +55,45 @@ public class Ingredient {
         this.ingredientName = ingredientName;
     }
 
-    public String getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 
-    public Set<Recipe> getIngredientRecipe() {
-        return ingredientRecipe;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setIngredientRecipe(Set<Recipe> ingredientRecipe) {
-        this.ingredientRecipe = ingredientRecipe;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
-    public Set<Recipe> getIngredientShoppingList() {
+    public Set<Recipe> getIngredientRecipes() {
+        return ingredientRecipes;
+    }
+
+    public void setIngredientRecipes(Set<Recipe> ingredientRecipes) {
+        this.ingredientRecipes = ingredientRecipes;
+    }
+
+    public Set<ShoppingList> getIngredientShoppingList() {
         return ingredientShoppingList;
     }
 
-    public void setIngredientShoppingList(Set<Recipe> ingredientShoppingList) {
+    public void setIngredientShoppingList(Set<ShoppingList> ingredientShoppingList) {
         this.ingredientShoppingList = ingredientShoppingList;
     }
 
     @Override
     public String toString() {
-        return "Ingredient{" +
+        return "IngredientService{" +
                 "id=" + id +
                 ", ingredientName='" + ingredientName + '\'' +
                 ", quantity='" + quantity + '\'' +
-                ", ingredientRecipe=" + ingredientRecipe +
-                ", ingredientShoppingList=" + ingredientShoppingList +
+
                 '}';
     }
 

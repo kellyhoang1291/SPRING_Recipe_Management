@@ -1,7 +1,9 @@
 package ca.gbc.yumoid.recipe.controllers;
 
 import ca.gbc.yumoid.recipe.model.Event;
+import ca.gbc.yumoid.recipe.model.Recipe;
 import ca.gbc.yumoid.recipe.services.EventService;
+import ca.gbc.yumoid.recipe.services.RecipeService;
 import ca.gbc.yumoid.recipe.services.SearchService;
 import ca.gbc.yumoid.recipe.services.UserService;
 import org.springframework.stereotype.Controller;
@@ -17,10 +19,13 @@ public class EventController {
     final private SearchService searchService;
     final private UserService userService;
 
-    public EventController(EventService eventService, SearchService searchService, UserService userService) {
+    final private RecipeService recipeService;
+
+    public EventController(EventService eventService, SearchService searchService, UserService userService, RecipeService recipeService) {
         this.eventService = eventService;
         this.searchService = searchService;
         this.userService = userService;
+        this.recipeService = recipeService;
     }
 
     @GetMapping("/list")
@@ -40,29 +45,20 @@ public class EventController {
 
         // create model attribute to bind form data
         Event event = new Event();
-
         model.addAttribute("event", event);
 
-        return "/registered/event/update";
-    }
+        List<Recipe> listRecipes = searchService.listAll("");
+        model.addAttribute("recipes", listRecipes);
 
-    @GetMapping("/update")
-    public String update(@RequestParam("id") Long id,
-                                    Model model) {
-
-        // get the event from the service
-        Event event = eventService.findById(id);
-
-        // set event as a model attribute to pre-populate the form
-        model.addAttribute("event", event);
-
-        // send over to our form
-        return "/registered/event/update";
+        return "/registered/event/create";
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute("event") Event event) {
+        Recipe recipe = event.getEventRecipe();
+        recipe.getEvents().add(event);
 
+        recipeService.save(recipe);
         // save the event
         eventService.save(event);
 
@@ -70,14 +66,44 @@ public class EventController {
         return "redirect:/registered/event/list";
     }
 
+    @GetMapping("/update")
+    public String update(@RequestParam("id") Long id, Model model) {
+
+        // get the event from the service
+        Event event = eventService.findById(id);
+
+        // set event as a model attribute to pre-populate the form
+        model.addAttribute("event", event);
+
+        List<Recipe> listRecipes = searchService.listAll("");
+        model.addAttribute("recipes", listRecipes);
+
+        // send over to our form
+        return "/registered/event/update";
+    }
+
+    @PostMapping("/update/save")
+    public String save(@ModelAttribute("event") Event event, @RequestParam("recipeId") Long recipeId) {
+        Recipe recipe = recipeService.getRecipeById(recipeId);
+        recipe.getEvents().add(event);
+        event.setEventRecipe(recipe);
+        recipeService.save(recipe);
+        eventService.save(event);
+
+        return "redirect:/registered/event/list";
+    }
+
+
     @GetMapping("/delete")
     public String delete(@RequestParam("id") Long id) {
-
-        // delete the employee
+        Event event = eventService.findById(id);
+        // delete the event
+        Recipe recipe = event.getEventRecipe();
+        recipe.getEvents().remove(event);
+        recipeService.save(recipe);
         eventService.deleteById(id);
 
-        // redirect to /employees/list
-        return "redirect:/employees/list";
+        return "redirect:/registered/event/list";
 
     }
 }

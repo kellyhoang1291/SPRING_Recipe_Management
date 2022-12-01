@@ -49,11 +49,12 @@
             </thead>
             <tbody>
             <tr th:each="recipe :${recipes}">
-                <td th:text="${recipe.name}"></td>
+                <td>
+                    <a th:href="@{/registered/recipe/view(id=${recipe.id})}" th:text="${recipe.name}"></a>
+                </td>
                 <td th:text="${recipe.prepTime} + ' minutes'"></td>
                 <td th:text="${recipe.cookTime} + ' minutes'"></td>
                 <td th:text="${recipe.totalTime} + ' minutes'"></td>
-                <td th:text="${recipe.ingredients}"></td>
                 <td th:text="${recipe.steps}"></td>
                 <td th:text="${recipe.dateAdded}"></td>
                 <td th:text="${recipe.userRecipe.firstName} + ' ' + ${recipe.userRecipe.lastName}"></td>

@@ -22,7 +22,6 @@ public class Recipe {
     private int prepTime;
     private int cookTime;
     private int totalTime;
-    private String ingredients;
     private String steps;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateAdded;
@@ -38,30 +37,33 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private User userRecipe;
 
-    @ManyToMany(mappedBy = "ingredientRecipe")
-    private Set<Ingredient> recipeIngredients = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "recipes_ingredients",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private Set<Ingredient> recipeIngredients;
 
+    @OneToMany(mappedBy = "eventRecipe")
+    private Set<Event> events = new HashSet<>();
 
     public Recipe() {}
 
-    public Recipe(Long id, String name, int prepTime, int cookTime, int totalTime, String ingredients, String steps, LocalDate dateAdded) {
+    public Recipe(Long id, String name, int prepTime, int cookTime, int totalTime, String steps, LocalDate dateAdded) {
         this.id = id;
         this.name = name;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
         this.totalTime = totalTime;
-        this.ingredients = ingredients;
         this.steps = steps;
         this.dateAdded = dateAdded;
     }
 
-    public Recipe(Long id, String name, int prepTime, int cookTime, int totalTime, String ingredients, String steps, LocalDate dateAdded, Set<User> likedByUsers, User userRecipe) {
+    public Recipe(Long id, String name, int prepTime, int cookTime, int totalTime, String steps, LocalDate dateAdded, Set<User> likedByUsers, User userRecipe) {
         this.id = id;
         this.name = name;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
         this.totalTime = totalTime;
-        this.ingredients = ingredients;
         this.steps = steps;
         this.dateAdded = dateAdded;
         this.likedByUsers = likedByUsers;
@@ -108,14 +110,6 @@ public class Recipe {
         this.totalTime = totalTime;
     }
 
-    public String getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
-    }
-
     public LocalDate getDateAdded() {
         return dateAdded;
     }
@@ -148,6 +142,22 @@ public class Recipe {
         this.steps = steps;
     }
 
+    public Set<Ingredient> getRecipeIngredients() {
+        return recipeIngredients;
+    }
+
+    public void setRecipeIngredients(Set<Ingredient> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
     @Override
     public String toString() {
         return "Recipe{" +
@@ -156,7 +166,6 @@ public class Recipe {
                 ", prepTime=" + prepTime +
                 ", cookTime=" + cookTime +
                 ", totalTime=" + totalTime +
-                ", ingredients='" + ingredients + '\'' +
                 ", steps='" + steps + '\'' +
                 ", dateAdded=" + dateAdded +
                 ", likedByUsers=" + likedByUsers +
