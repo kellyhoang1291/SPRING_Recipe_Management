@@ -21,7 +21,11 @@
         <div><span>Shopping List</span></div>
     </h2>
 
+
     <div class="container px-4 py-5 shadow" id="featured-2">
+        <form th:action="@{/registered/ingredients/shop/export}" method="post">
+            <button type="submit" class="btn btn-primary">Export to PDF</button>
+        </form>
         <table class="table table-striped">
             <thead>
             <tr>
