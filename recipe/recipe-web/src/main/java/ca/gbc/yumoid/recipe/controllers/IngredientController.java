@@ -7,6 +7,11 @@ import ca.gbc.yumoid.recipe.repositories.UserRepository;
 import ca.gbc.yumoid.recipe.services.IngredientService;
 import ca.gbc.yumoid.recipe.services.RecipeService;
 import ca.gbc.yumoid.recipe.services.SearchService;
+import com.itextpdf.html2pdf.ConverterProperties;
+import com.itextpdf.html2pdf.HtmlConverter;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,8 +20,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Optional;
@@ -29,13 +41,19 @@ public class IngredientController {
     private final RecipeService recipeService;
 
     private final SearchService searchService;
-    final private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public IngredientController(IngredientService ingredientService, RecipeService recipeService, SearchService searchService, UserRepository userRepository) {
+    private final ServletContext servletContext;
+
+    private final TemplateEngine templateEngine;
+
+    public IngredientController(IngredientService ingredientService, RecipeService recipeService, SearchService searchService, UserRepository userRepository, ServletContext servletContext, TemplateEngine templateEngine) {
         this.ingredientService = ingredientService;
         this.recipeService = recipeService;
         this.searchService = searchService;
         this.userRepository = userRepository;
+        this.servletContext = servletContext;
+        this.templateEngine = templateEngine;
     }
 
     //-------------------------- Create Recipe - Add/Edit/Delete Ingredients
@@ -169,11 +187,7 @@ public class IngredientController {
                 break;
             }
         }
-
-
-
         return "redirect:/registered/recipe/update/" + recipeId;
-
     }
 
     @RequestMapping("/update/edit")
@@ -245,6 +259,35 @@ public class IngredientController {
             }
         }
         return "redirect:/registered/ingredients/shop/view";
+    }
+
+    @RequestMapping("/shop/export")
+    public ResponseEntity<?> getPDF(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException{
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.getUserByUsername(username);
+        Set<Ingredient> userIngredients = searchService.listMyIngredients(username);
+        WebContext context = new WebContext(request, response, servletContext);
+        context.setVariable("userIngredients", userIngredients);
+        String dataHtml = templateEngine.process("/registered/shoppinglist/export", context);
+
+        ByteArrayOutputStream target = new ByteArrayOutputStream();
+        ConverterProperties converterProperties = new ConverterProperties();
+        converterProperties.setBaseUri("http://localhost:8081");
+        /* Call convert method */
+        HtmlConverter.convertToPdf(dataHtml, target, converterProperties);
+
+        /* extract output as bytes */
+        byte[] bytes = target.toByteArray();
+
+
+        /* Send the response as downloadable PDF */
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=shoppinglist.pdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(bytes);
+
     }
 
 }
