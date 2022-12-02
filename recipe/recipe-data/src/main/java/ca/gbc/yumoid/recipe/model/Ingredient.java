@@ -20,6 +20,9 @@ public class Ingredient {
     @ManyToMany(mappedBy = "recipeIngredients")
     private Set<Recipe> ingredientRecipes = new HashSet<>();
 
+    @ManyToMany(mappedBy = "userIngredients")
+    private Set<User> ingredientUsers = new HashSet<>();
+
     @ManyToMany(mappedBy ="shoppingListIngredients")
     private Set<ShoppingList> ingredientShoppingList = new HashSet<>();
 
@@ -85,6 +88,14 @@ public class Ingredient {
 
     public void setIngredientShoppingList(Set<ShoppingList> ingredientShoppingList) {
         this.ingredientShoppingList = ingredientShoppingList;
+    }
+
+    public Set<User> getIngredientUsers() {
+        return ingredientUsers;
+    }
+
+    public void setIngredientUsers(Set<User> ingredientUsers) {
+        this.ingredientUsers = ingredientUsers;
     }
 
     @Override

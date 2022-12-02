@@ -2,11 +2,16 @@ package ca.gbc.yumoid.recipe.controllers;
 
 import ca.gbc.yumoid.recipe.model.Ingredient;
 import ca.gbc.yumoid.recipe.model.Recipe;
+import ca.gbc.yumoid.recipe.model.User;
+import ca.gbc.yumoid.recipe.repositories.UserRepository;
 import ca.gbc.yumoid.recipe.services.IngredientService;
 import ca.gbc.yumoid.recipe.services.RecipeService;
 import ca.gbc.yumoid.recipe.services.SearchService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,11 +29,13 @@ public class IngredientController {
     private final RecipeService recipeService;
 
     private final SearchService searchService;
+    final private UserRepository userRepository;
 
-    public IngredientController(IngredientService ingredientService, RecipeService recipeService, SearchService searchService) {
+    public IngredientController(IngredientService ingredientService, RecipeService recipeService, SearchService searchService, UserRepository userRepository) {
         this.ingredientService = ingredientService;
         this.recipeService = recipeService;
         this.searchService = searchService;
+        this.userRepository = userRepository;
     }
 
     //-------------------------- Create Recipe - Add/Edit/Delete Ingredients
@@ -149,7 +156,7 @@ public class IngredientController {
 
     @RequestMapping("/update/edit")
     public String editUpdateRecipe(@RequestParam("recipeId") Long recipeId, @RequestParam("ingredientId") Long ingredientId, Model model, HttpSession session){
-        Optional<Ingredient> ingredient = ingredientService.findById(ingredientId);
+        Ingredient ingredient = ingredientService.findById(ingredientId);
 
         session.setAttribute("recipeId", recipeId);
         model.addAttribute("currentIngredient", ingredient);
@@ -163,6 +170,59 @@ public class IngredientController {
         session.removeAttribute("recipeId");
 
         return "redirect:/registered/recipe/update/" + recipeId;
+    }
+
+    @RequestMapping("/shop/view")
+    public String viewShoppingList(Model model){
+        Set<Ingredient> userIngredients;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.getUserByUsername(username);
+        userIngredients = searchService.listMyIngredients(username);
+        model.addAttribute("userIngredients", userIngredients);
+        model.addAttribute("user", user);
+
+        return "/registered/shoppinglist/list";
+    }
+
+    @RequestMapping("/shop/add")
+    public String addToShopping(@RequestParam("recipeId") Long recipeId, @RequestParam("ingredientId") Long ingredientId, Model model){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.getUserByUsername(username);
+        Ingredient ingredient = ingredientService.findById(ingredientId);
+        Set<Ingredient> userIngredients = searchService.listMyIngredients(username);
+
+        userIngredients.add(ingredient);
+        user.setUserIngredients(userIngredients);
+        userRepository.save(user);
+
+//        model.addAttribute("userIngredients", userIngredients);
+//        model.addAttribute("recipe", recipeService.getRecipeById(recipeId));
+//        model.addAttribute("ingredients", searchService.ingredientSet(recipeId));
+        return "redirect:/registered/recipe/view/" + recipeId;
+    }
+
+    @RequestMapping("/shop/delete")
+    public String deleteFromShopping(@RequestParam("ingredientId") Long ingredientId, Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.getUserByUsername(username);
+        Set<Ingredient> userIngredients = searchService.listMyIngredients(username);
+
+        Iterator ingredientSet = userIngredients.iterator();
+
+        while (ingredientSet.hasNext()){
+            Ingredient ri = (Ingredient) ingredientSet.next();
+            if (ri.getId() == ingredientId){
+                userIngredients.remove(ri);
+                user.setUserIngredients(userIngredients);
+                userRepository.save(user);
+                break;
+            }
+        }
+        return "redirect:/registered/ingredients/shop/view";
     }
 
 }

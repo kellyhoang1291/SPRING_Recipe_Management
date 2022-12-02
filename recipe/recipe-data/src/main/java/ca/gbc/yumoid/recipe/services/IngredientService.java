@@ -21,8 +21,8 @@ public class IngredientService {
         return null;
     }
 
-    public Optional<Ingredient> findById(Long id){
-        return ingredientRepository.findById(id);
+    public Ingredient findById(Long id){
+        return ingredientRepository.getIngredientById(id);
     }
 
 

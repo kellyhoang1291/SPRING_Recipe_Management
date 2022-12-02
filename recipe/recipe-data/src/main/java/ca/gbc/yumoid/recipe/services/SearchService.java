@@ -45,4 +45,8 @@ public class SearchService {
 
     public Set<Ingredient> ingredientSet(Long recipeId) { return searchRepository.getIngredientsByRecipe(recipeId); }
 
+    public List<ShoppingList> listMyShoppings(User user) { return searchRepository.findShoppingListByUsername(user); }
+
+    public Set<Ingredient> listMyIngredients(String username) { return searchRepository.findIngredientsByUsername(username); }
+
 }

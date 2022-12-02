@@ -29,7 +29,7 @@
           <th scope="col">Ingredient Name</th>
           <th scope="col">Quantity</th>
           <th scope="col">Unit</th>
-          <th scope="col">Actions</th>
+          <th scope="col">Shopping List</th>
         </tr>
         </thead>
         <tbody>
@@ -40,12 +40,15 @@
             <td>
               <div class="row g-3">
                 <div class="col-auto">
-                  <form th:action="@{/registered/shoppingLists/add}" method="post">
+                  <form th:if="${!ingredient.getIngredientUsers().contains(user)}" th:action="@{/registered/ingredients/shop/add}" method="post">
                     <input type="hidden" th:name="recipeId"
                            th:value="${recipe.id}" class="form-control" required />
                     <input type="hidden" th:name="ingredientId"
                            th:value="${ingredient.id}" class="form-control" />
                     <button type="submit" class="btn btn-primary btn-sm">Add To Shopping List</button>
+                  </form>
+                  <form th:if="${ingredient.getIngredientUsers().contains(user)}">
+                    <label>Added</label>
                   </form>
                 </div>
               </div>

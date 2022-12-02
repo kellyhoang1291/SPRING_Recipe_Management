@@ -18,6 +18,7 @@ import ca.gbc.yumoid.recipe.services.RecipeService;
 import ca.gbc.yumoid.recipe.services.SearchService;
 import ca.gbc.yumoid.recipe.services.UserService;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -100,14 +101,23 @@ public class RecipeController {
     //View recipe
 
 
-    @RequestMapping({"/view"})
-    public String view(@RequestParam Long id, Model model) {
+    @RequestMapping({"/view/{id}"})
+    public String view(@PathVariable Long id, Model model) {
         Recipe recipe = recipeService.getRecipeById(id);
         Set<Ingredient> ingredients = searchService.ingredientSet(id);
         Ingredient ingredient = new Ingredient();
         model.addAttribute("recipe", recipe);
         model.addAttribute("ingredients", ingredients);
         model.addAttribute("ingredient", ingredient);
+
+        Set<Ingredient> userIngredients;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userService.getUserByUsername(username);
+        userIngredients = searchService.listMyIngredients(username);
+        model.addAttribute("user", user);
+        model.addAttribute("userIngredients", userIngredients);
+
         return "registered/recipe/view";
     }
 

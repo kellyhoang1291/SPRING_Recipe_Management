@@ -64,6 +64,12 @@
                            th:href="@{/registered/event/list}" th:text="'View Events'"></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/ingredients/shop/view' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/ingredients/shop/view' ? 'page':''}"
+                           th:href="@{/registered/ingredients/shop/view}" th:text="'View Shopping List'"></a>
+                    </li>
+                    <li class="nav-item">
                         <form th:action="@{/doLogout}" method="post">
                             <button class="btn btn-light" style="background-color: #e88419; color: white;"
                                     type="submit" th:text="'Logout'"></button>

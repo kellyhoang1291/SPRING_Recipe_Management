@@ -11,12 +11,54 @@ public class ShoppingList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_shopping_list", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
-    private User user;
+    private String shoppingListName;
+
+    @ManyToOne
+    @JoinTable(name = "user_id")
+    private User shoppingListUser;
 
     @ManyToMany
     @JoinTable(name = "shopping_list_ingredients",
             joinColumns = @JoinColumn(name = "shopping_list_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private Set<Ingredient> shoppingListIngredients;
+
+    public ShoppingList() {
+    }
+
+    public ShoppingList(Long id, String shoppingListName) {
+        this.id = id;
+        this.shoppingListName = shoppingListName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getShoppingListName() {
+        return shoppingListName;
+    }
+
+    public void setShoppingListName(String shoppingListName) {
+        this.shoppingListName = shoppingListName;
+    }
+
+    public User getShoppingListUser() {
+        return shoppingListUser;
+    }
+
+    public void setShoppingListUser(User shoppingListUser) {
+        this.shoppingListUser = shoppingListUser;
+    }
+
+    public Set<Ingredient> getShoppingListIngredients() {
+        return shoppingListIngredients;
+    }
+
+    public void setShoppingListIngredients(Set<Ingredient> shoppingListIngredients) {
+        this.shoppingListIngredients = shoppingListIngredients;
+    }
 }

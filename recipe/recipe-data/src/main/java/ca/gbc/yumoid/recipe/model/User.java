@@ -49,6 +49,12 @@ public class User {
     @OneToMany(mappedBy = "userEvent")
     private Set<Event> events;
 
+    @ManyToMany
+    @JoinTable(name = "users_ingredients",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private Set<Ingredient> userIngredients = new HashSet<>();
+
     public User() {
     }
 
@@ -195,6 +201,14 @@ public class User {
 
     public void setEvents(Set<Event> events) {
         this.events = events;
+    }
+
+    public Set<Ingredient> getUserIngredients() {
+        return userIngredients;
+    }
+
+    public void setUserIngredients(Set<Ingredient> userIngredients) {
+        this.userIngredients = userIngredients;
     }
 
     @Override

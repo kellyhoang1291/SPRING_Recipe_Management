@@ -36,6 +36,12 @@ public interface SearchRepository extends JpaRepository<Recipe, Long> {
     @Query("SELECT i FROM Ingredient i JOIN i.ingredientRecipes r WHERE r.id = :id")
     Set<Ingredient> getIngredientsByRecipe(Long id);
 
+    @Query("SELECT s FROM ShoppingList s WHERE s.shoppingListUser = ?1")
+    List<ShoppingList> findShoppingListByUsername(User user);
+
+    @Query("SELECT i FROM Ingredient i JOIN i.ingredientUsers u WHERE u.username LIKE %?1%")
+    Set<Ingredient> findIngredientsByUsername(String username);
+
 }
 
 
