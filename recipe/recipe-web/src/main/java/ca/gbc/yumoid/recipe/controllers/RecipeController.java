@@ -139,10 +139,27 @@ public class RecipeController {
     @PostMapping(value = "/save")
     public String saveRecipe(Recipe recipe, HttpSession session) {
         Set<Ingredient> recipeIngredients = (Set<Ingredient>) session.getAttribute("recipeIngredients");
-        recipe.setRecipeIngredients(recipeIngredients);
 
-        session.setAttribute("recipe",recipe);
-        return "redirect:/registered/ingredients/save";
+        if (recipeIngredients == null){
+            recipeService.save(recipe);
+            return "redirect:/registered/recipe/list";
+        } else {
+            session.setAttribute("recipe",recipe);
+            recipe.setRecipeIngredients(recipeIngredients);
+            return "redirect:/registered/ingredients/save";
+        }
+    }
+
+    @PostMapping(value = "/update/save")
+    public String updateRecipe(@ModelAttribute("recipe") Recipe tempRecipe, @RequestParam("recipeId") Long recipeId){
+        Recipe recipe = recipeService.getRecipeById(recipeId);
+        recipe.setName(tempRecipe.getName());
+        recipe.setCookTime(tempRecipe.getCookTime());
+        recipe.setPrepTime(tempRecipe.getPrepTime());
+        recipe.setTotalTime(tempRecipe.getTotalTime());
+        recipe.setSteps(tempRecipe.getSteps());
+        recipeService.save(recipe);
+        return "redirect:/registered/recipe/list";
     }
 
     //Like Recipe

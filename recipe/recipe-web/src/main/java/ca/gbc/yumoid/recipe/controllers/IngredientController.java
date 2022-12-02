@@ -134,6 +134,26 @@ public class IngredientController {
 
     @RequestMapping("/update/delete")
     public String deleteUpdateRecipe(@RequestParam("recipeId") Long recipeId, @RequestParam("ingredientId") Long ingredientId){
+        //remove from shop list if presents
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.getUserByUsername(username);
+        Set<Ingredient> userIngredients = searchService.listMyIngredients(username);
+
+        Iterator shopIngredients = userIngredients.iterator();
+
+        while (shopIngredients.hasNext()){
+            Ingredient si = (Ingredient) shopIngredients.next();
+            if (si.getId() == ingredientId){
+                userIngredients.remove(si);
+                user.setUserIngredients(userIngredients);
+                userRepository.save(user);
+                break;
+            }
+        }
+
+        //remove from recipe
         Recipe recipe = recipeService.getRecipeById(recipeId);
 
         Set<Ingredient> recipeIngredients = searchService.ingredientSet(recipeId);
@@ -149,6 +169,8 @@ public class IngredientController {
                 break;
             }
         }
+
+
 
         return "redirect:/registered/recipe/update/" + recipeId;
 

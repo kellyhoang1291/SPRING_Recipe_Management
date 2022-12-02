@@ -43,6 +43,8 @@
         <button type="submit" class="btn btn-primary">Add Ingredient</button>
       </div>
     </form>
+
+
     <table class="table table-striped">
       <thead>
       <tr>
@@ -87,7 +89,9 @@
     <br>
     <br>
     <h3>Recipe Information</h3>
-    <form th:action="@{/registered/recipe/save}" th:object="${recipe}" method="post">
+    <form th:action="@{/registered/recipe/update/save}" th:object="${recipe}" method="post">
+      <input type="hidden" th:name="recipeId"
+             th:value="${recipe.id}" class="form-control" required />
       <div class="row mb-3">
         <label class="col-sm-2" th:text="'Recipe Name:'"></label>
         <div class="col-sm-8">
@@ -112,12 +116,7 @@
           <input type="text" class="form-control" th:field="*{steps}" th:disabled="false" />
         </div>
       </div>
-<!--      <div class="row mb-3">-->
-<!--        <label class="col-sm-2" th:text="'Created By:'"></label>-->
-<!--        <div class="col-sm-8">-->
-<!--          <label class="col-sm-2" th:text="${recipe.userRecipe.getFullName()}"/>-->
-<!--        </div>-->
-<!--      </div>-->
+      <button type="submit" class="btn btn-primary">Update Recipe</button>
     </form>
     <form th:action="@{/registered/recipe/list}">
       <button class="btn btn-lg btn-dark" type="submit" th:text="'Close'"></button>
