@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <div th:replace="header :: myheader"></div>
+  <meta charset="UTF-8">
+  <title>Yumoid - Edit Ingredient</title>
+
+</head>
+<body>
+
+
+
+<form th:action="@{/registered/ingredients/new/save}" th:object="${currentIngredient}"
+      method="post" class="container shadow p-2">
+  <h2 class="pb-2 border-bottom" th:text="'Edit Ingredient'">
+    <div><span>
+      Edit Ingredient
+    </span></div>
+  </h2>
+  <br>
+  <label class="col-sm-8" th:text="'Ingredient Name:'">Ingredient Name:</label>
+  <input type="text" th:name="ingredientName" th:id="ingredientName"
+         th:value="${currentIngredient.ingredientName}" class="form-control"/>
+  <br>
+
+  <label class="col-4 col-form-label" th:text="'Quantity:'">Quantity:</label>
+  <input type="number" th:name="quantity" th:id="quantity" th:value="${currentIngredient.quantity}" class="form-control" required />
+  <br>
+
+  <label class="col-4 col-form-label" th:text="'Unit:'">Unit:</label>
+  <input type="text" th:name="unit" th:id="unit"
+         th:value="${currentIngredient.unit}" class="form-control"/>
+  <br>
+
+  <button type="submit" class="btn btn-dark">Update Ingredient</button>
+  <div class="mt-3"><a th:href="@{/registered/recipe/list}">Return to Recipe Dashboard</a></div>
+</form>
+<br><br><br>
+
+</body>
+</html>

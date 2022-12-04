@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<div th:fragment="myheader">
+    <nav class="navbar navbar-dark navbar-expand-md sticky-top navbar-shrink py-3" id="mainNav">
+        <div class="container"><a class="navbar-brand d-flex align-items-center"
+                                  th:href="@{/registered/index}"><span
+                class="bs-icon-sm bs-icon-circle bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon"><svg
+                viewBox="140.176 68.291 55.91 55.511" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse style="stroke: rgb(0, 0, 0); fill: #e88419;" cx="168.53" cy="96.246" rx="26.358"
+                                     ry="26.358" />
+                            <text
+                                    style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 61px; white-space: pre;"
+                                    x="148.163" y="122.205">Y</text>
+                        </svg></span><span>Yumoid</span></a><button data-bs-toggle="collapse" class="navbar-toggler"
+                                                                    data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span
+                class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mx-auto">
+                    <a class="nav-link"
+                       th:classappend="${#httpServletRequest.getRequestURI() == '/registered/index' ? 'active':''}"
+                       th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/index' ? 'page':''}"
+                       th:href="@{/registered/index}" th:text="'Home'"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/recipe/create' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/recipe/create' ? 'page':''}"
+                           th:href="@{/registered/recipe/create}" th:text="'Create Recipe'"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/recipe/list' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/recipe/list' ? 'page':''}"
+                           th:href="@{/registered/recipe/list}" th:text="'View Recipes'"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/recipe/search' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/recipe/search' ? 'page':''}"
+                           th:href="@{/registered/recipe/search}" th:text="'Search Recipes'"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/user/view-profile' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/user/view-profile' ? 'page':''}"
+                           th:href="@{/registered/user/view-profile}" th:text="'View Profile'"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/meal/list' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/meal/list' ? 'page':''}"
+                           th:href="@{/registered/meal/list}" th:text="'Plan Meal'"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/event/list' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/eveny/list' ? 'page':''}"
+                           th:href="@{/registered/event/list}" th:text="'View Events'"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/registered/ingredients/shop/view' ? 'active':''}"
+                           th:aria-current="${#httpServletRequest.getRequestURI() == '/registered/ingredients/shop/view' ? 'page':''}"
+                           th:href="@{/registered/ingredients/shop/view}" th:text="'View Shopping List'"></a>
+                    </li>
+                    <li class="nav-item">
+                        <form th:action="@{/doLogout}" method="post">
+                            <button class="btn btn-light" style="background-color: #e88419; color: white;"
+                                    type="submit" th:text="'Logout'"></button>
+                        </form>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+
+</html>
