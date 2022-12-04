@@ -17,11 +17,13 @@
 
 <!--Display recipe-->
 <div class="container ">
-  <h2 class="pb-2 border-bottom">
-    <div><span>Yumoid Recipes</span></div>
-  </h2>
+
 
   <div class="container px-4 py-5 shadow" id="featured-2">
+
+    <h2 class="pb-2 border-bottom">
+      <div><span>Yumoid Recipes</span></div>
+    </h2>
     <h3>Ingredient List</h3>
     <form class="row g-3" th:action="@{/registered/ingredients/update/add}" th:object="${ingredient}"
           method="post" style="margin: 0 auto;" >
@@ -39,14 +41,14 @@
         <input type="text" th:field="*{unit}" class="form-control" placeholder="Ingredient unit" required />
       </div>
 
-      <div class="col-auto">
-        <button type="submit" class="btn btn-primary">Add Ingredient</button>
+      <div class="col-auto mb-3">
+        <button type="submit" class="btn btn-dark">Add Ingredient</button>
       </div>
     </form>
 
 
     <table class="table table-striped">
-      <thead>
+      <thead class="table-dark">
       <tr>
         <th scope="col">Ingredient Name</th>
         <th scope="col">Quantity</th>
@@ -88,6 +90,10 @@
     <br>
     <br>
     <br>
+
+
+  </div>
+  <div class="container px-4 py-5 shadow">
     <h3>Recipe Information</h3>
     <form th:action="@{/registered/recipe/update/save}" th:object="${recipe}" method="post">
       <input type="hidden" th:name="recipeId"
@@ -116,12 +122,11 @@
           <input type="text" class="form-control" th:field="*{steps}" th:disabled="false" />
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Update Recipe</button>
+      <button type="submit" class="btn btn-dark mb-3">Update Recipe</button>
     </form>
     <form th:action="@{/registered/recipe/list}">
-      <button class="btn btn-lg btn-dark" type="submit" th:text="'Close'"></button>
+      <button class="btn btn-dark" type="submit" th:text="'Close'"></button>
     </form>
-
   </div>
 </div>
 </body>
