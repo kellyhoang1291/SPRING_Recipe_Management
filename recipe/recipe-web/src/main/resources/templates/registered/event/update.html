@@ -20,11 +20,12 @@
 <body>
 
 <div class="container">
+    <div class="container px-4 py-5 shadow" id="featured-2">
+        <h2 class="pb-2 border-bottom">
+            <div><span>My Event</span></div>
+        </h2>
+    <p class="h4 mb-4">Update Event</p>
 
-    <h2>My Event</h2>
-    <hr>
-
-    <p class="h4 mb-4">Save Event</p>
 
     <form action="#" th:action="@{/registered/event/update/save}"
           th:object="${event}" method="POST">
@@ -47,8 +48,8 @@
                th:oninput="this.setCustomValidity('')"
                class="form-control mb-4 col-4">
 
-        <div class="mb-4 col-4">
-            <select class="form-select" th:id="recipeId" th:name="recipeId" th:required="true"
+        <div class="">
+            <select class="form-select form-control mb-4 col-4" th:id="recipeId" th:name="recipeId" th:required="true"
                     th:oninvalid="this.setCustomValidity('Please select a recipe')"
                     th:oninput="this.setCustomValidity('')">
                 <option th:each="recipe :${recipes}"
@@ -59,13 +60,13 @@
         </div>
 
 
-        <button type="submit" class="btn btn-info col-2">Save</button>
+        <button type="submit" class="btn btn-dark col-2">Save</button>
 
     </form>
 
     <hr>
     <a th:href="@{/registered/event/list}">Back to Event List</a>
-
+    </div>
 </div>
 </body>
 

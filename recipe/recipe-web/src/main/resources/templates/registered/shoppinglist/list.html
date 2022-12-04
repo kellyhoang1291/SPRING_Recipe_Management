@@ -17,14 +17,15 @@
 
 <!--Display ingredients-->
 <div class="container ">
-    <h2 class="pb-2 border-bottom">
-        <div><span>Shopping List</span></div>
-    </h2>
+
 
 
     <div class="container px-4 py-5 shadow" id="featured-2">
+        <h2 class="pb-2 border-bottom">
+            <div><span>Shopping List</span></div>
+        </h2>
         <form th:action="@{/registered/ingredients/shop/export}" method="post">
-            <button type="submit" class="btn btn-primary">Export to PDF</button>
+            <button type="submit" class="btn btn-dark">Export to PDF</button>
         </form>
         <table class="table table-striped">
             <thead>
@@ -57,7 +58,7 @@
         <br>
         <br>
         <form th:action="@{/registered/recipe/list}">
-            <button class="btn btn-lg btn-dark" type="submit" th:text="'Return to Recipe List'"></button>
+            <button class="btn   btn-dark" type="submit" th:text="'Return to Recipe List'"></button>
         </form>
 
     </div>
