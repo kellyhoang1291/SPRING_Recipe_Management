@@ -30,7 +30,7 @@
         <input type="radio" id="fav" name="type" value="favoriteRecipe"> Favorite Recipes
 
         <br>
-        <button class="btn btn-lg btn-dark" type="submit" th:text="'Apply Filter'"></button>
+        <button class="btn btn-lg btn-dark mb-3" type="submit" th:text="'Apply Filter'"></button>
     </form>
 
 
@@ -53,14 +53,14 @@
             <td>
                 <form th:unless="${recipe.getLikedByUsers().contains(user)}"
                       th:action="@{'/registered/recipe/favorite/' + ${recipe.id}}" method="post">
-                    <button class="btn" style="color: rgb(232, 132, 25);" type="submit"><i class="fa fa-star-o"
+                    <button class="btn btn-dark " style="color: rgb(232, 132, 25);" type="submit"><i class="fa fa-star-o"
                                                                                            aria-hidden="true"></i>
                         </i>
                     </button>
                 </form>
                 <button th:disabled="true"
                         th:if="${recipe.getLikedByUsers().contains(user)}"
-                        class="btn" type="submit" style="color: rgb(232, 132, 25);"> <i class="fa fa-star" aria-hidden="true"></i></button>
+                        class="btn btn-dark" type="submit" style="color: rgb(232, 132, 25);"> <i class="fa fa-star" aria-hidden="true"></i></button>
             </td>
 <!--            <td>-->
 <!--                <a th:href="@{/registered/recipe/view(id=${recipe.id})}" th:text="${recipe.name}"></a>-->
@@ -73,8 +73,8 @@
             <td th:text="${recipe.dateAdded}"></td>
             <td th:text="${recipe.userRecipe.getFullName()}"></td>
             <td>
-                <a class="btn btn-sm btn-primary" th:href="@{'/registered/recipe/view/'+ ${recipe.id}}">View</a>
-                <a class="btn btn-sm btn-primary" th:if="${recipe.userRecipe == user}" th:href="@{'/registered/recipe/update/' + ${recipe.id}}">Update</a>
+                <a class="btn btn-sm btn-dark" th:href="@{'/registered/recipe/view/'+ ${recipe.id}}">View</a>
+                <a class="btn btn-sm btn-dark" th:if="${recipe.userRecipe == user}" th:href="@{'/registered/recipe/update/' + ${recipe.id}}">Update</a>
             </td>
 
         </tr>

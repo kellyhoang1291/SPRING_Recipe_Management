@@ -41,8 +41,8 @@
                 <th>Prep Time</th>
                 <th>Cook Time</th>
                 <th>Total Time</th>
-                <th>Ingredients</th>
-                <th>Instruction</th>
+<!--                <th>Ingredients</th>-->
+<!--                <th>Instruction</th>-->
                 <th>Date Added</th>
                 <th>Created By</th>
             </tr>
@@ -55,7 +55,7 @@
                 <td th:text="${recipe.prepTime} + ' minutes'"></td>
                 <td th:text="${recipe.cookTime} + ' minutes'"></td>
                 <td th:text="${recipe.totalTime} + ' minutes'"></td>
-                <td th:text="${recipe.steps}"></td>
+<!--                <td th:text="${recipe.steps}"></td>-->
                 <td th:text="${recipe.dateAdded}"></td>
                 <td th:text="${recipe.userRecipe.firstName} + ' ' + ${recipe.userRecipe.lastName}"></td>
             </tr>

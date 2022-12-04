@@ -21,7 +21,7 @@
             <div><span> Create New Recipe</span></div>
         </h2>
         <h3>Ingredient List</h3>
-        <form class="row g-3" th:action="@{/registered/ingredients/new/add}" th:object="${ingredient}"
+        <form class="row g-3 pb-3" th:action="@{/registered/ingredients/new/add}" th:object="${ingredient}"
               method="post" style="margin: 0 auto;">
             <div class="col-auto">
                 <input  type="text" th:field="*{ingredientName}" class="form-control" placeholder="Ingredient Name" required />
@@ -36,12 +36,12 @@
             </div>
 
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary">Add Ingredient</button>
+                <button type="submit" class="btn btn-dark">Add Ingredient</button>
             </div>
         </form>
 
         <table class="table table-striped">
-            <thead>
+            <thead class="table-dark">
             <tr>
                 <th scope="col">Ingredient Name</th>
                 <th scope="col">Quantity</th>
@@ -66,7 +66,7 @@
                                        th:value="${ingredient.quantity}" class="form-control" required />
                                 <input type="hidden" th:name="unit"
                                        th:value="${ingredient.unit}" class="form-control" required />
-                                <button type="submit" class="btn btn-primary">Edit</button>
+                                <button type="submit" class="btn btn-dark">Edit</button>
                             </form>
                         </div>
 
@@ -91,7 +91,7 @@
         <br>
         <br>
         <br>
-        <h3> Recipe Information </h3>
+        <h3 class="border-bottom"> Recipe Information </h3>
         <form th:action="@{/registered/recipe/save}" th:object="${recipe}" method="post">
             <div class="row mb-3">
                 <label class="col-sm-2" th:text="'Recipe Name:'"></label>
