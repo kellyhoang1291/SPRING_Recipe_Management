@@ -23,14 +23,20 @@
         <div><span>Yumoid Recipes</span></div>
     </h2>
 
-    <form th:action="@{/registered/recipe/list}" method="post" >
-        Filter Condition:
-        <input type="radio" id="all" name="type" value="all"> All
-        <input type="radio" id="my" name="type" value="myRecipe"> My Recipes
-        <input type="radio" id="fav" name="type" value="favoriteRecipe"> Favorite Recipes
 
-        <br>
-        <button class="btn   btn-dark mb-3" type="submit" th:text="'Apply Filter'"></button>
+    <form th:action="@{/registered/recipe/list}" method="post" >
+        <div class="row g-3">
+            <div class="col-auto">
+                Filter Condition:
+                <input type="radio" id="all" name="type" value="all"> All
+                <input type="radio" id="my" name="type" value="myRecipe"> My Recipes
+                <input type="radio" id="fav" name="type" value="favoriteRecipe"> Favorite Recipes
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-dark mb-3" type="submit" th:text="'Apply Filter'"></button>
+            </div>
+        </div>
+
     </form>
 
 

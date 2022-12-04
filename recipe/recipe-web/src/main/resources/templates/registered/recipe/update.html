@@ -17,7 +17,38 @@
 
 <!--Display recipe-->
 <div class="container ">
-
+  <div class="container px-4 py-5 shadow">
+    <h3>Recipe Information</h3>
+    <form th:action="@{/registered/recipe/update/save}" th:object="${recipe}" method="post">
+      <input type="hidden" th:name="recipeId"
+             th:value="${recipe.id}" class="form-control" required />
+      <div class="row mb-3">
+        <label class="col-sm-2" th:text="'Recipe Name:'"></label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" th:field="*{name}" th:disabled="false" />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2" th:text="'Prep Time:'"></label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" th:field="*{prepTime}" th:disabled="false" />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2" th:text="'Cook Time:'"></label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" th:field="*{cookTime}" th:disabled="false" />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2" th:text="'Instructions:'"></label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" th:field="*{steps}" th:disabled="false" />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-dark mb-3">Update Recipe</button>
+    </form>
+  </div>
 
   <div class="container px-4 py-5 shadow" id="featured-2">
 
@@ -90,44 +121,11 @@
     <br>
     <br>
     <br>
-
-
   </div>
-  <div class="container px-4 py-5 shadow">
-    <h3>Recipe Information</h3>
-    <form th:action="@{/registered/recipe/update/save}" th:object="${recipe}" method="post">
-      <input type="hidden" th:name="recipeId"
-             th:value="${recipe.id}" class="form-control" required />
-      <div class="row mb-3">
-        <label class="col-sm-2" th:text="'Recipe Name:'"></label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" th:field="*{name}" th:disabled="false" />
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label class="col-sm-2" th:text="'Prep Time:'"></label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" th:field="*{prepTime}" th:disabled="false" />
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label class="col-sm-2" th:text="'Cook Time:'"></label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" th:field="*{cookTime}" th:disabled="false" />
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label class="col-sm-2" th:text="'Instructions:'"></label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" th:field="*{steps}" th:disabled="false" />
-        </div>
-      </div>
-      <button type="submit" class="btn btn-dark mb-3">Update Recipe</button>
-    </form>
-    <form th:action="@{/registered/recipe/list}">
-      <button class="btn btn-dark" type="submit" th:text="'Close'"></button>
-    </form>
-  </div>
+
+  <form th:action="@{/registered/recipe/list}">
+    <button class="btn btn-dark" type="submit" th:text="'Close'"></button>
+  </form>
 </div>
 </body>
 
