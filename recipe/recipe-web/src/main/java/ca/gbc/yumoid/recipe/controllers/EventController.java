@@ -11,6 +11,7 @@ package ca.gbc.yumoid.recipe.controllers;
 
 import ca.gbc.yumoid.recipe.model.Event;
 import ca.gbc.yumoid.recipe.model.Recipe;
+import ca.gbc.yumoid.recipe.repositories.RecipeRepository;
 import ca.gbc.yumoid.recipe.services.EventService;
 import ca.gbc.yumoid.recipe.services.RecipeService;
 import ca.gbc.yumoid.recipe.services.SearchService;
@@ -29,12 +30,14 @@ public class EventController {
     final private UserService userService;
 
     final private RecipeService recipeService;
+    final private RecipeRepository recipeRepository;
 
-    public EventController(EventService eventService, SearchService searchService, UserService userService, RecipeService recipeService) {
+    public EventController(EventService eventService, SearchService searchService, UserService userService, RecipeService recipeService, RecipeRepository recipeRepository) {
         this.eventService = eventService;
         this.searchService = searchService;
         this.userService = userService;
         this.recipeService = recipeService;
+        this.recipeRepository = recipeRepository;
     }
 
     @GetMapping("/list")
@@ -109,7 +112,7 @@ public class EventController {
         // delete the event
         Recipe recipe = event.getEventRecipe();
         recipe.getEvents().remove(event);
-        recipeService.save(recipe);
+        recipeRepository.save(recipe);
         eventService.deleteById(id);
 
         return "redirect:/registered/event/list";

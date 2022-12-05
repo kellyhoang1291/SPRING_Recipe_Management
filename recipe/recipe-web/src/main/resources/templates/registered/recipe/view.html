@@ -18,9 +18,6 @@
 <!--Display recipe-->
 <div class="container ">
   <div class="mt-3 container px-4 py-5 shadow">
-  <h2 class="pb-2 border-bottom">
-    <div><span>Yumoid View Recipe</span></div>
-  </h2>
     <h3 class="">Recipe Information</h3>
     <form th:object="${recipe}">
       <div class="row mb-3">
@@ -94,11 +91,9 @@
         </td>
       </tbody>
     </table>
-    <br>
-    <br>
-    <br>
-
   </div>
+  <br><br><br>
+  <div class="mt-3"><a th:href="@{/registered/recipe/list}">Return to Recipe Dashboard</a></div>
 </div>
 </body>
 

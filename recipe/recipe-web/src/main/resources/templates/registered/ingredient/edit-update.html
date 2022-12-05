@@ -14,29 +14,32 @@
 
 </head>
 <body>
-<h1 class="display-5 fw-bold" th:text="'Edit Ingredient'">Edit Ingredient</h1>
-<br>
-
 <form th:action="@{/registered/ingredients/update/save}" th:object="${ingredient}"
-      method="post" style="max-width: 600px; margin: 0 auto;">
+      method="post" class="container shadow p-2">
 
-    <label class="col-4 col-form-label" th:text="'Ingredient Name:'">Ingredient Name:</label>
+    <h2 class="pb-2 border-bottom" th:text="'Edit Ingredient'">
+        <div><span>
+      Edit Ingredient
+    </span></div>
+    </h2>
+
+    <label class="col-sm-8" th:text="'Ingredient Name:'">Ingredient Name:</label>
     <input type="text" th:name="ingredientName" th:id="ingredientName"
            th:field="*{ingredientName}" class="form-control"/>
     <br>
 
-    <label class="col-4 col-form-label" th:text="'Quantity:'">Quantity:</label>
+    <label class="col-sm-8" th:text="'Quantity:'">Quantity:</label>
     <input type="number" th:name="quantity" th:id="quantity" th:field="*{quantity}" class="form-control" required />
     <br>
 
-    <label class="col-4 col-form-label" th:text="'Unit:'">Unit:</label>
+    <label class="col-sm-8" th:text="'Unit:'">Unit:</label>
     <input type="text" th:name="unit" th:id="unit"
            th:field="*{unit}" class="form-control"/>
     <br>
 
-    <button type="submit" class="btn btn-primary">Update Ingredient</button>
+    <button type="submit" class="btn btn-dark">Update Ingredient</button>
+    <div class="mt-3"><a th:href="@{/registered/recipe/list}">Return to Recipe Dashboard</a></div>
 </form>
 <br><br><br>
-<a th:href="@{/registered/recipe/list}">Return to Recipe Dashboard</a>
 </body>
 </html>
