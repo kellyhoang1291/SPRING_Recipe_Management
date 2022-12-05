@@ -17,21 +17,21 @@
 <h1 class="display-5 fw-bold" th:text="'Edit Ingredient'">Edit Ingredient</h1>
 <br>
 
-<form th:action="@{/registered/ingredients/update/save}" th:object="${currentIngredient}"
+<form th:action="@{/registered/ingredients/update/save}" th:object="${ingredient}"
       method="post" style="max-width: 600px; margin: 0 auto;">
 
     <label class="col-4 col-form-label" th:text="'Ingredient Name:'">Ingredient Name:</label>
     <input type="text" th:name="ingredientName" th:id="ingredientName"
-           th:value="${currentIngredient.name}" class="form-control"/>
+           th:field="*{ingredientName}" class="form-control"/>
     <br>
 
     <label class="col-4 col-form-label" th:text="'Quantity:'">Quantity:</label>
-    <input type="number" th:name="quantity" th:id="quantity" th:value="${currentIngredient.quantity}" class="form-control" required />
+    <input type="number" th:name="quantity" th:id="quantity" th:field="*{quantity}" class="form-control" required />
     <br>
 
     <label class="col-4 col-form-label" th:text="'Unit:'">Unit:</label>
     <input type="text" th:name="unit" th:id="unit"
-           th:value="${currentIngredient.unit}" class="form-control"/>
+           th:field="*{unit}" class="form-control"/>
     <br>
 
     <button type="submit" class="btn btn-primary">Update Ingredient</button>

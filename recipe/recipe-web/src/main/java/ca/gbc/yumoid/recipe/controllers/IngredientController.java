@@ -1,3 +1,12 @@
+/**********************************************************************************
+ * Project: < Yumoid >
+ * Assignment: < assignment 2 >
+ * Author(s): < Robert Kaczur, Phuong Hoang, Truong Thi Bui>
+ * Student Number: < 101014890, 101306676, 101300750>
+ * Date: December 4th 2022
+ * Description: This java file is used to control ingredient activities available to
+ * registered users.
+ **********************************************************************************/
 package ca.gbc.yumoid.recipe.controllers;
 
 import ca.gbc.yumoid.recipe.model.Ingredient;
@@ -39,12 +48,9 @@ import java.util.Set;
 public class IngredientController {
     private final IngredientService ingredientService;
     private final RecipeService recipeService;
-
     private final SearchService searchService;
     private final UserRepository userRepository;
-
     private final ServletContext servletContext;
-
     private final TemplateEngine templateEngine;
 
     public IngredientController(IngredientService ingredientService, RecipeService recipeService, SearchService searchService, UserRepository userRepository, ServletContext servletContext, TemplateEngine templateEngine) {
@@ -191,19 +197,25 @@ public class IngredientController {
     }
 
     @RequestMapping("/update/edit")
-    public String editUpdateRecipe(@RequestParam("recipeId") Long recipeId, @RequestParam("ingredientId") Long ingredientId, Model model, HttpSession session){
+    public String editUpdateRecipe(Model model, @RequestParam("ingredientId") Long ingredientId, @RequestParam("recipeId") Long recipeId, HttpSession session){
         Ingredient ingredient = ingredientService.findById(ingredientId);
-
+        Recipe recipe = recipeService.getRecipeById(recipeId);
+        model.addAttribute("ingredient", ingredient);
+        session.setAttribute("ingredientId", ingredientId);
         session.setAttribute("recipeId", recipeId);
-        model.addAttribute("currentIngredient", ingredient);
+
         return "/registered/ingredient/edit-update";
     }
 
+
     @RequestMapping("/update/save")
-    public String saveUpdateRecipe(Ingredient ingredient, HttpSession session){
+    public String saveUpdateRecipe(@ModelAttribute("ingredient") Ingredient tempIngredient, HttpSession session){
+        Ingredient ingredient = ingredientService.findById((Long) session.getAttribute("ingredientId"));
+        ingredient.setIngredientName(tempIngredient.getIngredientName());
+        ingredient.setQuantity(tempIngredient.getQuantity());
+        ingredient.setUnit(tempIngredient.getUnit());
         ingredientService.save(ingredient);
         Long recipeId = (Long) session.getAttribute("recipeId");
-        session.removeAttribute("recipeId");
 
         return "redirect:/registered/recipe/update/" + recipeId;
     }
@@ -234,9 +246,6 @@ public class IngredientController {
         user.setUserIngredients(userIngredients);
         userRepository.save(user);
 
-//        model.addAttribute("userIngredients", userIngredients);
-//        model.addAttribute("recipe", recipeService.getRecipeById(recipeId));
-//        model.addAttribute("ingredients", searchService.ingredientSet(recipeId));
         return "redirect:/registered/recipe/view/" + recipeId;
     }
 

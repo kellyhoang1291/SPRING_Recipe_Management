@@ -14,7 +14,6 @@
 </head>
 
 <body class="">
-
 <!--Display recipe-->
 <div class="container ">
   <div class="container px-4 py-5 shadow">
@@ -95,7 +94,7 @@
         <td>
           <div class="row g-3">
             <div class="col-auto">
-              <form th:action="@{/registered/ingredients/update/edit}" th:va="${ingredient}" method="post">
+              <form th:action="@{/registered/ingredients/update/edit}" th:va="${ingredient}" method="get">
                 <input type="hidden" th:name="recipeId" th:value="${recipe.id}" class="form-control" required />
 
                 <input type="hidden" th:name="ingredientId"

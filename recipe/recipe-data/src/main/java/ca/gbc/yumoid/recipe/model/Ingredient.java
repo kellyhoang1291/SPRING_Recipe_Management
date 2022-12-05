@@ -1,3 +1,12 @@
+/**********************************************************************************
+ * Project: < Yumoid >
+ * Assignment: < assignment 2 >
+ * Author(s): < Robert Kaczur, Phuong Hoang, Truong Thi Bui>
+ * Student Number: < 101014890, 101306676, 101300750>
+ * Date: December 4rd 2022
+ * Description: This java file is used to set the ingredient entity in H2DB.
+ **********************************************************************************/
+
 package ca.gbc.yumoid.recipe.model;
 
 import javax.persistence.*;
