@@ -70,7 +70,7 @@ public class EventController {
         Recipe recipe = event.getEventRecipe();
         recipe.getEvents().add(event);
 
-        recipeService.save(recipe);
+        recipeRepository.save(recipe);
         // save the event
         eventService.save(event);
 
@@ -99,7 +99,7 @@ public class EventController {
         Recipe recipe = recipeService.getRecipeById(recipeId);
         recipe.getEvents().add(event);
         event.setEventRecipe(recipe);
-        recipeService.save(recipe);
+        recipeRepository.save(recipe);
         eventService.save(event);
 
         return "redirect:/registered/event/list";
