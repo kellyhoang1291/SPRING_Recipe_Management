@@ -18,25 +18,29 @@ is, instead of relying on index cards, a rolodex of a file folder.
     2.	Password: admin
 
 * Use Case Diagram
-
+![](https://github.com/kellyhoang1291/Spring_Recipe_Management/blob/master/screenshots/use_case.PNG)
 
 ## Screen List
 ### Login
-
+![](https://github.com/kellyhoang1291/Spring_Recipe_Management/blob/master/screenshots/login.png)
 ### Signup
-
+![](https://github.com/kellyhoang1291/Spring_Recipe_Management/blob/master/screenshots/signup.png)
 ### View Profile
-
+![](https://github.com/kellyhoang1291/Spring_Recipe_Management/blob/master/screenshots/view_profile.png)
 ### Change Password 
-
+![](https://github.com/kellyhoang1291/Spring_Recipe_Management/blob/master/screenshots/change_password.png)
 ### Main Menu
-
+![](https://github.com/kellyhoang1291/Spring_Recipe_Management/blob/master/screenshots/menu.png)
 ### Recipe List
-
+![](https://github.com/kellyhoang1291/Spring_Recipe_Management/blob/master/screenshots/recipe_list.png)
+### View Recipe
+![](https://github.com/kellyhoang1291/Spring_Recipe_Management/blob/master/screenshots/view_recipe.png)
+### Search Recipe
+![](https://github.com/kellyhoang1291/Spring_Recipe_Management/blob/master/screenshots/search_recipe.png)
 ### Event List
-
+![](https://github.com/kellyhoang1291/Spring_Recipe_Management/blob/master/screenshots/event_list.png)
 ### Shopping List
-
+![](https://github.com/kellyhoang1291/Spring_Recipe_Management/blob/master/screenshots/shopping_list.png)
 
 
 
