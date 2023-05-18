@@ -1,20 +1,42 @@
-# yumoid
+# Recipe Management
+## Info
+* Description: 
+Spring Recipe application that can be used to help facilitate a client/user’s kitchen skills and modernize grocery shopping, that
+is, instead of relying on index cards, a rolodex of a file folder.
+* Dependencies
+	* Java version 11
+	* Spring Boot
+	* Spring DevTools
+	* Spring Web
+	* Thymeleaf
+	* Spring Data JPA
+	* H2 Database (embedded) – must be used for your database
+	* MVC design – utilizing a combination of controllers, service and repository layers. 
 
-Group assignment 1
+* Login Credentials (for test data)
+    1.	Username: admin
+    2.	Password: admin
 
-The goal of this assignment is building a Spring Recipe Assignment Spring Boot. 
-We continue to the concepts of service layers and Spring MVC.
+* Use Case Diagram
 
-Course: COMP 3095
-Team Name: Modulix
-Project Name: Yumoid
-Team Members:
-1.	Robert Kaczur - 101014890
-2.	Phuong Hoang - 101306676
-3.	Truong Thi Bui – 101300750
 
-Login Credentials (for test data)
-1.	Username: admin
-2.	Password: admin
+## Screen List
+### Login
+
+### Signup
+
+### View Profile
+
+### Change Password 
+
+### Main Menu
+
+### Recipe List
+
+### Event List
+
+### Shopping List
+
+
 
 
